@@ -15,6 +15,9 @@
 		FFB6647E1C877A8800D0157B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFB6647C1C877A8800D0157B /* LaunchScreen.storyboard */; };
 		FFB664891C877A8800D0157B /* KeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664881C877A8800D0157B /* KeysTests.swift */; };
 		FFB664941C877A8800D0157B /* KeysUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664931C877A8800D0157B /* KeysUITests.swift */; };
+		FFB664A31C877DCB00D0157B /* Vault.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664A21C877DCB00D0157B /* Vault.swift */; };
+		FFB664A51C87800B00D0157B /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664A41C87800B00D0157B /* Secret.swift */; };
+		FFB664A71C8780DB00D0157B /* SecretField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664A61C8780DB00D0157B /* SecretField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		FFB6648F1C877A8800D0157B /* KeysUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeysUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFB664931C877A8800D0157B /* KeysUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysUITests.swift; sourceTree = "<group>"; };
 		FFB664951C877A8800D0157B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFB664A21C877DCB00D0157B /* Vault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vault.swift; sourceTree = "<group>"; };
+		FFB664A41C87800B00D0157B /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		FFB664A61C8780DB00D0157B /* SecretField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		FFB664701C877A8800D0157B /* Keys */ = {
 			isa = PBXGroup;
 			children = (
+				FFB664A11C877DA700D0157B /* Model */,
 				FFB664711C877A8800D0157B /* AppDelegate.swift */,
 				FFB664731C877A8800D0157B /* FirstViewController.swift */,
 				FFB664751C877A8800D0157B /* SecondViewController.swift */,
@@ -126,6 +133,16 @@
 				FFB664951C877A8800D0157B /* Info.plist */,
 			);
 			path = KeysUITests;
+			sourceTree = "<group>";
+		};
+		FFB664A11C877DA700D0157B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FFB664A21C877DCB00D0157B /* Vault.swift */,
+				FFB664A41C87800B00D0157B /* Secret.swift */,
+				FFB664A61C8780DB00D0157B /* SecretField.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,7 +277,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFB664761C877A8800D0157B /* SecondViewController.swift in Sources */,
+				FFB664A51C87800B00D0157B /* Secret.swift in Sources */,
+				FFB664A71C8780DB00D0157B /* SecretField.swift in Sources */,
 				FFB664721C877A8800D0157B /* AppDelegate.swift in Sources */,
+				FFB664A31C877DCB00D0157B /* Vault.swift in Sources */,
 				FFB664741C877A8800D0157B /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
