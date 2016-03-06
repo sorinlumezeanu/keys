@@ -24,13 +24,19 @@ class SecretsTVC: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.navigationItem.title = "spanac"
         
-        //let vaultFile = VaultFile()
-        //vaultFile.iterateDocuments()
+        
+
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -40,13 +46,17 @@ class SecretsTVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Repository.sharedInstance.getVaults().count
+        return Repository.getVaults().count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.VaultTableCellIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.VaultTableCellIdentifier, forIndexPath: indexPath) as! SettingsTVCell
 
-        cell.textLabel?.text = Repository.sharedInstance.getVaults()[indexPath.row].name
+        let vaultFile = Repository.getVaults()[indexPath.row]
+        let vault = vaultFile.vault!
+        
+        cell.vaultName?.text = vault.description
+        cell.vaultSummary?.text = vault.summary
 
         return cell
     }

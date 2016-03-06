@@ -7,3 +7,9 @@ VaultFile
 - encrypted with "vaultKey"
 - file name: subset of the hashed vaultKey
 - contents: the encoded 'Vault' object
+
+
+masterKey + salt (unique for masterKey) > PBKDF > encryption key
+fileBytes + salt(?) + encryptionKey > AES > ciphertext
+
+store on disk: ciphertext + salt + salt(?)

@@ -22,7 +22,7 @@ class Secret : NSObject, NSCoding {
     init(withType type: Type, name: String)
     {
         self.type = type
-        self.name = String()
+        self.name = name
         //self.fields = [SecretField]()
     }
     
@@ -37,6 +37,9 @@ class Secret : NSObject, NSCoding {
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(type.rawValue, forKey: "type")
         coder.encodeObject(name, forKey: "name")
-        coder.encodeObject(description, forKey: "description")
+    }
+    
+    override var description: String {
+        return "\(type): \(name)"
     }
 }

@@ -10,62 +10,75 @@ import Foundation
 
 class Repository
 {
-    static let sharedInstance = Repository()
+    private static var vaultFiles = [VaultFile]()
     
-    private static var vaults = [Vault]()
+    class func getVaults() -> [VaultFile] {
+        return Repository.vaultFiles
+    }
     
-    private init() {
-        
-        let savedVaults = Repository.readVaultFiles()
-        if savedVaults != nil && savedVaults?.count > 0 {
-            print("read \(savedVaults!.count) files")
-            Repository.vaults += savedVaults!
+    class func loadVaultFiles()
+    {
+        Repository.vaultFiles = [VaultFile]()
+        if let persistedVaultFiles = Repository.readVaultFiles() {
+            Repository.vaultFiles += persistedVaultFiles
         }
-        else
-        {
+        
+        if Repository.vaultFiles.isEmpty {
+            print("failed to read from disk, creating in-memory Vaultfiles")
+            
             let secret1 = Secret(withType: .Login, name: "facebook")
             let secret2 = Secret(withType: .Login, name: "google")
             let secret3 = Secret(withType: .Login, name: "apple")
             
-            Repository.vaults.append(Vault(withName: "Sorin", secrets: [secret1, secret2]))
-            Repository.vaults.append(Vault(withName: "Costina", secrets: [secret3]))
-            
-            for vault in Repository.vaults {
-                Repository.saveVaultFile(vault)
-            }
+            Repository.vaultFiles.append(VaultFile(withVault:Vault(withName: "Sorin", secrets: [secret1, secret2])))
+            Repository.vaultFiles.append(VaultFile(withVault:Vault(withName: "Costina", secrets: [secret3])))
         }
     }
     
-    func getVaults() -> [Vault] {
-        return Repository.vaults
+    class func saveVaultFiles()
+    {
+        for vaultFile in Repository.vaultFiles {
+            vaultFile.saveToDisk()
+        }
     }
     
-    class func saveVaultFile(file: Vault) {
-        let fileBytes = NSKeyedArchiver.archivedDataWithRootObject(file)
+    class func readVaultFiles() -> [VaultFile]? {
         let fileManager = NSFileManager.defaultManager()
         let urlForDocumentsDirectory = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-        let fileUrl = urlForDocumentsDirectory.URLByAppendingPathComponent(file.name + ".vf")
-        fileBytes.writeToURL(fileUrl, atomically: true)
-    }
     
-    class func readVaultFiles() -> [Vault]? {
-        let fileManager = NSFileManager.defaultManager()
-        let urlForDocumentsDirectory = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         
         do {
             let fileUrls = try fileManager.contentsOfDirectoryAtURL(urlForDocumentsDirectory, includingPropertiesForKeys: nil, options: [.SkipsHiddenFiles, .SkipsPackageDescendants, .SkipsSubdirectoryDescendants])
-            var vaults = [Vault]()
+            
+            var vaultFiles = [VaultFile]()
             for fileUrl in fileUrls {
-                let fileBytes = NSData(contentsOfURL: fileUrl)
-                let vault = NSKeyedUnarchiver.unarchiveObjectWithData(fileBytes!) as! Vault
-                vaults.append(vault)
+//                let fileBytes = NSData(contentsOfURL: fileUrl)
+//                let vault = NSKeyedUnarchiver.unarchiveObjectWithData(fileBytes!) as! Vault
+                if let vaultFile = VaultFile(withFileUrl: fileUrl) {
+                    vaultFiles.append(vaultFile)
+                }
             }
-            return vaults
+            return vaultFiles
         }
         catch let error as NSError {
-            error.description
+            print ("reading files error: \(error.description)")
         }
         
         return nil
     }
+    
+//    class func saveVault(vault: Vault) {        
+//        let fileBytes = NSKeyedArchiver.archivedDataWithRootObject(vault)
+//        let fileManager = NSFileManager.defaultManager()
+//        let urlForDocumentsDirectory = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+//        let fileUrl = urlForDocumentsDirectory.URLByAppendingPathComponent(vault.name + ".vf")
+//        
+//        //fileBytes.writeToURL(fileUrl, atomically: true)
+//        do {
+//            try fileBytes.writeToURL(fileUrl, options: [.DataWritingAtomic, .DataWritingFileProtectionComplete])
+//        }
+//        catch let error as NSError {
+//            print ("saving file [\(vault.name)] error: \(error.description)")
+//        }
+//    }
 }

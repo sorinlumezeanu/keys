@@ -29,4 +29,16 @@ class Vault: NSObject, NSCoding {
         coder.encodeObject(name, forKey: "name")
         coder.encodeObject(secrets, forKey: "secrets")
     }
+    
+    override var description: String {
+        return "\(name): (\(secrets.count))"
+    }
+    
+    var summary: String {
+        var summary = ""
+        for secret in secrets {
+            summary += secret.description + "\r\n"
+        }
+        return summary
+    }
 }

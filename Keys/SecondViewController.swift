@@ -21,5 +21,14 @@ class SecondViewController: UIViewController {
     }
 
 
+    @IBAction func loadVaults()
+    {
+        Repository.loadVaultFiles()
+    }
+    
+    @IBAction func saveVaults()
+    {
+        Repository.saveVaultFiles()
+    }
 }
 
