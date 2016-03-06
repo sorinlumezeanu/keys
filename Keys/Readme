@@ -1,0 +1,9 @@
+Vault
+ - owner
+ - secrets[]
+
+
+VaultFile
+- encrypted with "vaultKey"
+- file name: subset of the hashed vaultKey
+- contents: the encoded 'Vault' object

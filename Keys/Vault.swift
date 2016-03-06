@@ -8,13 +8,25 @@
 
 import Foundation
 
-class Vault {
+class Vault: NSObject, NSCoding {
     var name: String
     var secrets: [Secret]
     
-    init(withName name: String)
+    init(withName name: String, secrets: [Secret])
     {
         self.name = name
-        self.secrets = [Secret]()
+        self.secrets = secrets
+    }
+    
+    required convenience init?(coder decoder: NSCoder) {
+        guard let name = decoder.decodeObjectForKey("name") as? String else { return nil }
+        guard let secrets = decoder.decodeObjectForKey("secrets") as? [Secret] else { return nil }
+        
+        self.init(withName: name, secrets: secrets)
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(name, forKey: "name")
+        coder.encodeObject(secrets, forKey: "secrets")
     }
 }
