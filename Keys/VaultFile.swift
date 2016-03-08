@@ -11,43 +11,65 @@ import Foundation
 class VaultFile {
     let passphrase = "Spanac777"
     
-    
-    var vault: Vault? = nil
-    var salt: NSData? = nil
-    var iv: NSData? = nil
+    var fileUrl: NSURL!     // make readonly
+    var vault: Vault!       // make readonly
+    var salt: NSData!       // make readonly
+    var iv: NSData!         // make readonly
     
     init(withVault vault: Vault)
     {
         self.vault = vault
-        self.salt = nil
-        self.iv = nil
-        saveToDisk()
+        updateFileUrl()
     }
     
     init?(withFileUrl fileUrl: NSURL)
     {
-        if load(fileUrl) == false {
+        self.fileUrl = fileUrl
+        if load() == false {
             return nil
         }
     }
     
-    func load(fileUrl: NSURL) -> Bool
+    func load() -> Bool
     {
-        let fileBytes = NSData(contentsOfURL: fileUrl)
+        guard let fileData = NSData(contentsOfURL: fileUrl) else {
+            print("Unable to read content of file: \(fileUrl.path)")
+            return false
+        }
         
-        salt = fileBytes?.subdataWithRange(NSRange(location: 0, length: 8))
-        iv = fileBytes?.subdataWithRange(NSRange(location: 8, length: 16))
-        let encryptedVaultBytes = fileBytes?.subdataWithRange(NSRange(location: 24, length: fileBytes!.length - 24))
+        return unpackFileData(fileData)
+    }
+    
+    func save() -> Bool
+    {
+        let fileData = packFileData()
         
-        let securityServices = SecurityServices()
-        let key = securityServices.generateAESKeyFromPassphrase(passphrase, andSalt: salt!)
-        let cleartextVaultBytes = securityServices.decrypt(encryptedVaultBytes, withKey: key, initializationVector: iv)
-        //let cleartextVaultBytes = encryptedVaultBytes
+        do {
+            try fileData.writeToURL(fileUrl, options: [.DataWritingAtomic, .DataWritingFileProtectionComplete])
+        }
+        catch let error as NSError {
+            print ("saving file [\(fileUrl.path)] error: \(error.description)")
+            return false
+        }
         
-        print("load: \(fileUrl.pathComponents!.last!): salt=[\(salt?.description)] iv=[\(iv?.description)] datalength=\(cleartextVaultBytes?.length)")
+        return true
+    }
+    
+    private func unpackFileData(fileData: NSData) -> Bool
+    {
+        let aesCryptor = AESCryptor.createWithAlgorithm(AES128)
+        let saltSize = Int(aesCryptor.saltSize)
+        let blockSize = Int(aesCryptor.blockSize)
         
+        salt = fileData.subdataWithRange(NSRange(location: 0, length: saltSize))
+        iv = fileData.subdataWithRange(NSRange(location: saltSize, length: blockSize))
+        let encryptedVaultBytes = fileData.subdataWithRange(NSRange(location: saltSize + blockSize,
+            length: fileData.length - (saltSize + blockSize)))
+        
+        let key = aesCryptor.generateKeyFromPassphrase(passphrase, andSalt: salt!)
+        let cleartextVaultBytes = aesCryptor.decrypt(encryptedVaultBytes, withKey: key, initializationVector: iv)
+
         self.vault = NSKeyedUnarchiver.unarchiveObjectWithData(cleartextVaultBytes!) as? Vault
-        
         if self.vault == nil {
             print("failed to read vault file: " + fileUrl.path!)
         }
@@ -55,42 +77,31 @@ class VaultFile {
         return (self.vault != nil)
     }
     
-    func saveToDisk()
+    private func packFileData() -> NSData
     {
-        let fileManager = NSFileManager.defaultManager()
-        let urlForDocumentsDirectory = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-        let vaultFileUrl = urlForDocumentsDirectory.URLByAppendingPathComponent(vault!.name + ".vf")
+        let fileData = NSMutableData()
         
-        let vaultData = NSKeyedArchiver.archivedDataWithRootObject(vault!)
-        
-        //print("---- save ----")
-        //print(vaultData.description)
-        
-        let securityServices = SecurityServices()
+        let aesCryptor = AESCryptor.createWithAlgorithm(AES128)
         if salt == nil || iv == nil
         {
-            salt = securityServices.generateSalt()
-            iv = securityServices.generateAESInitializationVector()
-            print("save: \(vault?.name): generated salt & iv")
+            salt = aesCryptor.generateSalt()
+            iv = aesCryptor.generateInitializationVector()
             
         }
         
-        print("save: \(vault?.name): salt=[\(salt?.description)] iv=[\(iv?.description)] datalength=\(vaultData.length)")
+        let vaultData = NSKeyedArchiver.archivedDataWithRootObject(vault!)
+        let encryptionKey = aesCryptor.generateKeyFromPassphrase(passphrase, andSalt: salt!)
+        let encryptedVaultData = aesCryptor.encrypt(vaultData, withKey: encryptionKey, initializationVector: iv!)
         
-        let encryptionKey = securityServices.generateAESKeyFromPassphrase(passphrase, andSalt: salt!)
-        let encryptedVaultData = securityServices.encrypt(vaultData, withKey: encryptionKey, initializationVector: iv!)
-        //let encryptedVaultData = vaultData
-        
-        let fileData = NSMutableData()
         fileData.appendData(salt!)
         fileData.appendData(iv!)
         fileData.appendData(encryptedVaultData)
         
-        do {
-            try fileData.writeToURL(vaultFileUrl, options: [.DataWritingAtomic, .DataWritingFileProtectionComplete])
-        }
-        catch let error as NSError {
-            print ("saving file [\(vaultFileUrl.path)] error: \(error.description)")
-        }
+        return fileData
+    }
+    
+    private func updateFileUrl()
+    {
+        fileUrl = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!.URLByAppendingPathComponent(vault.name + ".vf")
     }
 }

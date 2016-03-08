@@ -32,13 +32,14 @@ class Repository
             
             Repository.vaultFiles.append(VaultFile(withVault:Vault(withName: "Sorin", secrets: [secret1, secret2])))
             Repository.vaultFiles.append(VaultFile(withVault:Vault(withName: "Costina", secrets: [secret3])))
+            saveVaultFiles()
         }
     }
     
     class func saveVaultFiles()
     {
         for vaultFile in Repository.vaultFiles {
-            vaultFile.saveToDisk()
+            vaultFile.save()
         }
     }
     
@@ -52,8 +53,6 @@ class Repository
             
             var vaultFiles = [VaultFile]()
             for fileUrl in fileUrls {
-//                let fileBytes = NSData(contentsOfURL: fileUrl)
-//                let vault = NSKeyedUnarchiver.unarchiveObjectWithData(fileBytes!) as! Vault
                 if let vaultFile = VaultFile(withFileUrl: fileUrl) {
                     vaultFiles.append(vaultFile)
                 }
