@@ -9,12 +9,10 @@
 import Foundation
 
 class VaultFile {
-    let passphrase = "Spanac777"
-    
-    var fileUrl: NSURL!     // make readonly
-    var vault: Vault!       // make readonly
-    var salt: NSData!       // make readonly
-    var iv: NSData!         // make readonly
+    private(set) var fileUrl: NSURL!
+    private(set) var vault: Vault!
+    private(set) var salt: NSData!
+    private(set) var iv: NSData!
     
     init(withVault vault: Vault)
     {
@@ -61,20 +59,34 @@ class VaultFile {
         let saltSize = Int(aesCryptor.saltSize)
         let blockSize = Int(aesCryptor.blockSize)
         
-        salt = fileData.subdataWithRange(NSRange(location: 0, length: saltSize))
-        iv = fileData.subdataWithRange(NSRange(location: saltSize, length: blockSize))
-        let encryptedVaultBytes = fileData.subdataWithRange(NSRange(location: saltSize + blockSize,
-            length: fileData.length - (saltSize + blockSize)))
-        
-        let key = aesCryptor.generateKeyFromPassphrase(passphrase, andSalt: salt!)
-        let cleartextVaultBytes = aesCryptor.decrypt(encryptedVaultBytes, withKey: key, initializationVector: iv)
-
-        self.vault = NSKeyedUnarchiver.unarchiveObjectWithData(cleartextVaultBytes!) as? Vault
-        if self.vault == nil {
-            print("failed to read vault file: " + fileUrl.path!)
+        salt = fileData.safeSubdataWithRange(NSRange(location: 0, length: saltSize))
+        guard salt != nil else {
+            print("unable to unpack the salt")
+            return false
         }
         
-        return (self.vault != nil)
+        iv = fileData.safeSubdataWithRange(NSRange(location: saltSize, length: blockSize))
+        guard iv != nil else {
+            print("unable to unpack the iv")
+            return false
+        }
+        
+        guard let encryptedVaultBytes = fileData.safeSubdataWithRange(NSRange(location: saltSize + blockSize,
+            length: fileData.length - (saltSize + blockSize))) else {
+                print("unable to unpack the encrypted vault bytes")
+                return false
+        }
+        
+        let key = aesCryptor.generateKeyFromPassphrase(SecurityContext.sharedInstance.mainPassphrase, andSalt: salt)
+        let cleartextVaultBytes = aesCryptor.decrypt(encryptedVaultBytes, withKey: key, initializationVector: iv)
+
+        vault = NSKeyedUnarchiver.unarchiveObjectWithData(cleartextVaultBytes!) as? Vault
+        guard vault != nil else {
+            print("failed to un-archive the Vault: " + fileUrl.path!)
+            return false;
+        }
+        
+        return true
     }
     
     private func packFileData() -> NSData
@@ -82,19 +94,17 @@ class VaultFile {
         let fileData = NSMutableData()
         
         let aesCryptor = AESCryptor.createWithAlgorithm(AES128)
-        if salt == nil || iv == nil
-        {
+        if salt == nil || iv == nil {
             salt = aesCryptor.generateSalt()
             iv = aesCryptor.generateInitializationVector()
-            
         }
         
         let vaultData = NSKeyedArchiver.archivedDataWithRootObject(vault!)
-        let encryptionKey = aesCryptor.generateKeyFromPassphrase(passphrase, andSalt: salt!)
+        let encryptionKey = aesCryptor.generateKeyFromPassphrase(SecurityContext.sharedInstance.getPassphraseForVault(vault), andSalt: salt!)
         let encryptedVaultData = aesCryptor.encrypt(vaultData, withKey: encryptionKey, initializationVector: iv!)
         
-        fileData.appendData(salt!)
-        fileData.appendData(iv!)
+        fileData.appendData(salt)
+        fileData.appendData(iv)
         fileData.appendData(encryptedVaultData)
         
         return fileData

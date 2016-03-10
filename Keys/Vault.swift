@@ -9,23 +9,27 @@
 import Foundation
 
 class Vault: NSObject, NSCoding {
+    var uuid: String
     var name: String
     var secrets: [Secret]
     
-    init(withName name: String, secrets: [Secret])
+    init(withName name: String, uuid:String? = nil, secrets: [Secret]? = nil)
     {
+        self.uuid = uuid ?? NSUUID().UUIDString
         self.name = name
-        self.secrets = secrets
+        self.secrets = secrets ?? [Secret]()
     }
     
     required convenience init?(coder decoder: NSCoder) {
+        guard let uuid = decoder.decodeObjectForKey("uuid") as? String else { return nil }
         guard let name = decoder.decodeObjectForKey("name") as? String else { return nil }
         guard let secrets = decoder.decodeObjectForKey("secrets") as? [Secret] else { return nil }
         
-        self.init(withName: name, secrets: secrets)
+        self.init(withName: name, uuid: uuid, secrets: secrets)
     }
     
     func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(uuid, forKey: "uuid")
         coder.encodeObject(name, forKey: "name")
         coder.encodeObject(secrets, forKey: "secrets")
     }

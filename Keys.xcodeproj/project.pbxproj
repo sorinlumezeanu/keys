@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF086F4E1C9000BC002C78F0 /* SecurityContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF086F4D1C9000BC002C78F0 /* SecurityContext.swift */; };
+		FF086F511C907760002C78F0 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF086F501C907760002C78F0 /* MainVC.swift */; };
+		FF63D9C41C8ED5B400C3548C /* NSData+ErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = FF63D9C31C8ED5B400C3548C /* NSData+ErrorHandling.m */; };
+		FF63D9C71C8EF45C00C3548C /* NSException+Convertor.m in Sources */ = {isa = PBXBuildFile; fileRef = FF63D9C61C8EF45C00C3548C /* NSException+Convertor.m */; };
+		FF63D9CA1C8F2E0700C3548C /* NSData+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63D9C91C8F2E0700C3548C /* NSData+Extension.swift */; };
 		FF89C05E1C8C16A800779E5D /* SettingsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89C05D1C8C16A800779E5D /* SettingsTVCell.swift */; };
 		FF89C0631C8C2D9A00779E5D /* AESCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FF89C0621C8C2D9A00779E5D /* AESCryptor.m */; };
 		FFB664721C877A8800D0157B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664711C877A8800D0157B /* AppDelegate.swift */; };
@@ -42,6 +47,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF086F4D1C9000BC002C78F0 /* SecurityContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityContext.swift; sourceTree = "<group>"; };
+		FF086F501C907760002C78F0 /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		FF63D9C21C8ED5B400C3548C /* NSData+ErrorHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ErrorHandling.h"; sourceTree = "<group>"; };
+		FF63D9C31C8ED5B400C3548C /* NSData+ErrorHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ErrorHandling.m"; sourceTree = "<group>"; };
+		FF63D9C51C8EF45C00C3548C /* NSException+Convertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSException+Convertor.h"; sourceTree = "<group>"; };
+		FF63D9C61C8EF45C00C3548C /* NSException+Convertor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSException+Convertor.m"; sourceTree = "<group>"; };
+		FF63D9C91C8F2E0700C3548C /* NSData+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Extension.swift"; sourceTree = "<group>"; };
 		FF89C05D1C8C16A800779E5D /* SettingsTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVCell.swift; sourceTree = "<group>"; };
 		FF89C0611C8C2D9A00779E5D /* Keys-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Keys-Bridging-Header.h"; sourceTree = "<group>"; };
 		FF89C0621C8C2D9A00779E5D /* AESCryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCryptor.m; sourceTree = "<group>"; };
@@ -93,6 +105,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF086F4C1C90007E002C78F0 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				FF89C0641C8C2FE200779E5D /* AESCryptor.h */,
+				FF89C0621C8C2D9A00779E5D /* AESCryptor.m */,
+				FF086F4D1C9000BC002C78F0 /* SecurityContext.swift */,
+			);
+			name = Security;
+			sourceTree = "<group>";
+		};
+		FF086F4F1C9076F9002C78F0 /* Auxiliary */ = {
+			isa = PBXGroup;
+			children = (
+				FFB6647A1C877A8800D0157B /* Assets.xcassets */,
+				FFB6647C1C877A8800D0157B /* LaunchScreen.storyboard */,
+				FF89C0611C8C2D9A00779E5D /* Keys-Bridging-Header.h */,
+				FFB6647F1C877A8800D0157B /* Info.plist */,
+				FFD980B21C8868D3004DF3D2 /* Readme */,
+			);
+			name = Auxiliary;
+			sourceTree = "<group>";
+		};
+		FF63D9BA1C8ED37E00C3548C /* Objective-C Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				FF63D9C21C8ED5B400C3548C /* NSData+ErrorHandling.h */,
+				FF63D9C31C8ED5B400C3548C /* NSData+ErrorHandling.m */,
+				FF63D9C51C8EF45C00C3548C /* NSException+Convertor.h */,
+				FF63D9C61C8EF45C00C3548C /* NSException+Convertor.m */,
+			);
+			name = "Objective-C Wrappers";
+			sourceTree = "<group>";
+		};
+		FF63D9C81C8F2DD800C3548C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FF63D9C91C8F2E0700C3548C /* NSData+Extension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		FFB664651C877A8800D0157B = {
 			isa = PBXGroup;
 			children = (
@@ -116,14 +169,14 @@
 		FFB664701C877A8800D0157B /* Keys */ = {
 			isa = PBXGroup;
 			children = (
+				FF086F4F1C9076F9002C78F0 /* Auxiliary */,
+				FF086F4C1C90007E002C78F0 /* Security */,
+				FF63D9C81C8F2DD800C3548C /* Extensions */,
+				FF63D9BA1C8ED37E00C3548C /* Objective-C Wrappers */,
 				FFD980AF1C8860D8004DF3D2 /* View Controllers */,
-				FFB664A11C877DA700D0157B /* Secrets */,
+				FFB664A11C877DA700D0157B /* Vaults */,
 				FFB664711C877A8800D0157B /* AppDelegate.swift */,
 				FFB664771C877A8800D0157B /* Main.storyboard */,
-				FFB6647A1C877A8800D0157B /* Assets.xcassets */,
-				FFB6647C1C877A8800D0157B /* LaunchScreen.storyboard */,
-				FFB6647F1C877A8800D0157B /* Info.plist */,
-				FFD980B21C8868D3004DF3D2 /* Readme */,
 			);
 			path = Keys;
 			sourceTree = "<group>";
@@ -146,7 +199,7 @@
 			path = KeysUITests;
 			sourceTree = "<group>";
 		};
-		FFB664A11C877DA700D0157B /* Secrets */ = {
+		FFB664A11C877DA700D0157B /* Vaults */ = {
 			isa = PBXGroup;
 			children = (
 				FFB664A21C877DCB00D0157B /* Vault.swift */,
@@ -154,11 +207,8 @@
 				FFB664A41C87800B00D0157B /* Secret.swift */,
 				FFB664A61C8780DB00D0157B /* SecretField.swift */,
 				FFB664A81C8784DF00D0157B /* Repository.swift */,
-				FF89C0641C8C2FE200779E5D /* AESCryptor.h */,
-				FF89C0621C8C2D9A00779E5D /* AESCryptor.m */,
-				FF89C0611C8C2D9A00779E5D /* Keys-Bridging-Header.h */,
 			);
-			name = Secrets;
+			name = Vaults;
 			sourceTree = "<group>";
 		};
 		FFD980AF1C8860D8004DF3D2 /* View Controllers */ = {
@@ -167,6 +217,7 @@
 				FFB664751C877A8800D0157B /* SecondViewController.swift */,
 				FFD980B01C88610D004DF3D2 /* SecretsTVC.swift */,
 				FF89C05D1C8C16A800779E5D /* SettingsTVCell.swift */,
+				FF086F501C907760002C78F0 /* MainVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -303,7 +354,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFB664761C877A8800D0157B /* SecondViewController.swift in Sources */,
+				FF086F511C907760002C78F0 /* MainVC.swift in Sources */,
+				FF086F4E1C9000BC002C78F0 /* SecurityContext.swift in Sources */,
 				FFB664A51C87800B00D0157B /* Secret.swift in Sources */,
+				FF63D9CA1C8F2E0700C3548C /* NSData+Extension.swift in Sources */,
+				FF63D9C41C8ED5B400C3548C /* NSData+ErrorHandling.m in Sources */,
 				FF89C05E1C8C16A800779E5D /* SettingsTVCell.swift in Sources */,
 				FFB664A91C8784DF00D0157B /* Repository.swift in Sources */,
 				FFB664A71C8780DB00D0157B /* SecretField.swift in Sources */,
@@ -312,6 +367,7 @@
 				FFF5E49D1C89C68500CD7DF5 /* VaultFile.swift in Sources */,
 				FFD980B11C88610D004DF3D2 /* SecretsTVC.swift in Sources */,
 				FF89C0631C8C2D9A00779E5D /* AESCryptor.m in Sources */,
+				FF63D9C71C8EF45C00C3548C /* NSException+Convertor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

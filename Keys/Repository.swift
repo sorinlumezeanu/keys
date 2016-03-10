@@ -29,7 +29,7 @@ class Repository
             let secret1 = Secret(withType: .Login, name: "facebook")
             let secret2 = Secret(withType: .Login, name: "google")
             let secret3 = Secret(withType: .Login, name: "apple")
-            
+                        
             Repository.vaultFiles.append(VaultFile(withVault:Vault(withName: "Sorin", secrets: [secret1, secret2])))
             Repository.vaultFiles.append(VaultFile(withVault:Vault(withName: "Costina", secrets: [secret3])))
             saveVaultFiles()

@@ -16,7 +16,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VaultTableCellIdentifier" rowHeight="88" id="O9a-Bm-pty" customClass="SettingsTVCell" customModule="Keys" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="88"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O9a-Bm-pty" id="9uG-3K-zGF">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="87.5"/>
@@ -63,7 +63,41 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zlq-cn-9yc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1564" y="-399"/>
+            <point key="canvasLocation" x="1864" y="-1277"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="aL5-jU-olk">
+            <objects>
+                <viewController title="Main" id="NS7-5S-tMy" customClass="MainVC" customModule="Keys" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3N3-4T-cKP"/>
+                        <viewControllerLayoutGuide type="bottom" id="2f5-Wi-4TI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sMx-Cc-YxC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOR-Kt-rqg">
+                                <rect key="frame" x="251" y="259" width="98" height="22"/>
+                                <color key="backgroundColor" red="0.83980284685863871" green="0.83980284685863871" blue="0.83980284685863871" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Add Vault"/>
+                                <connections>
+                                    <action selector="addVault" destination="NS7-5S-tMy" eventType="touchUpInside" id="8Me-Rp-ULs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0QY-Pn-5hF">
+                                <rect key="frame" x="202" y="289" width="197" height="22"/>
+                                <color key="backgroundColor" red="0.83980284689999996" green="0.83980284689999996" blue="0.83980284689999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Import Vaults"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8Mn-nj-4Ge"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jcA-Zu-yCO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1584" y="-399"/>
         </scene>
         <!--Settings-->
         <scene sceneID="wg7-f3-ORb">
@@ -131,7 +165,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="CmG-VK-Gbl" kind="relationship" relationship="rootViewController" id="8NR-Iq-QDK"/>
+                        <segue destination="NS7-5S-tMy" kind="relationship" relationship="rootViewController" id="LMP-vN-3B8"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DKu-ES-xWo" userLabel="First Responder" sceneMemberID="firstResponder"/>
