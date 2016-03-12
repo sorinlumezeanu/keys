@@ -12,8 +12,26 @@ class Repository
 {
     private static var vaultFiles = [VaultFile]()
     
+    private static var fileManager = NSFileManager.defaultManager()
+    private static var urlForDocumentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+    
     class func getVaults() -> [VaultFile] {
         return Repository.vaultFiles
+    }
+    
+    class func addVault(vaultFile: VaultFile) {
+        Repository.vaultFiles.append(vaultFile)
+    }
+    
+    class func peekNumberOfVaultFiles() -> Int {
+        do {
+            let vaultFileUrls = try fileManager.contentsOfDirectoryAtURL(urlForDocumentsDirectory, includingPropertiesForKeys: nil, options: [.SkipsHiddenFiles, .SkipsPackageDescendants, .SkipsSubdirectoryDescendants])
+            return vaultFileUrls.count
+        }
+        catch let error as NSError {
+            print("cannot peek number of vault files: \(error.description)")
+            return 0
+        }
     }
     
     class func loadVaultFiles()
@@ -65,19 +83,4 @@ class Repository
         
         return nil
     }
-    
-//    class func saveVault(vault: Vault) {        
-//        let fileBytes = NSKeyedArchiver.archivedDataWithRootObject(vault)
-//        let fileManager = NSFileManager.defaultManager()
-//        let urlForDocumentsDirectory = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-//        let fileUrl = urlForDocumentsDirectory.URLByAppendingPathComponent(vault.name + ".vf")
-//        
-//        //fileBytes.writeToURL(fileUrl, atomically: true)
-//        do {
-//            try fileBytes.writeToURL(fileUrl, options: [.DataWritingAtomic, .DataWritingFileProtectionComplete])
-//        }
-//        catch let error as NSError {
-//            print ("saving file [\(vault.name)] error: \(error.description)")
-//        }
-//    }
 }

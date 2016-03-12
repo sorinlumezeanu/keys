@@ -17,6 +17,7 @@ class VaultFile {
     init(withVault vault: Vault)
     {
         self.vault = vault
+        
         updateFileUrl()
     }
     
