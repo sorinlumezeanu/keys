@@ -9,40 +9,62 @@
 import Foundation
 
 class VaultFile {
+    
+    var isLoaded: Bool {
+        return fileUrl != nil && salt != nil && iv != nil && encryptedVaultData != nil
+    }
+    
     private(set) var fileUrl: NSURL!
     private(set) var vault: Vault!
     private(set) var salt: NSData!
     private(set) var iv: NSData!
+    private(set) var encryptedVaultData: NSData!
     
     init(withVault vault: Vault)
     {
         self.vault = vault
-        
-        updateFileUrl()
     }
     
-    init?(withFileUrl fileUrl: NSURL)
+    init(withFileUrl fileUrl: NSURL)
     {
         self.fileUrl = fileUrl
-        if load() == false {
-            return nil
-        }
     }
     
     func load() -> Bool
     {
-        guard let fileData = NSData(contentsOfURL: fileUrl) else {
-            print("Unable to read content of file: \(fileUrl.path)")
-            return false
+        guard fileUrl != nil else { return false }
+        
+        if let fileData = NSData(contentsOfURL: fileUrl) {
+            return unpack(fileData)
+        }
+        return false
+    }
+        
+    func decryptWithPassphrase(passphrase: String) -> Bool
+    {
+        guard isLoaded else { return false }
+        
+        let aesCryptor = AESCryptor.createWithAlgorithm(AES128)
+        let key = aesCryptor.generateKeyFromPassphrase(passphrase, andSalt: salt)
+        let cleartextVaultBytes = aesCryptor.decrypt(encryptedVaultData, withKey: key, initializationVector: iv)
+
+        vault = NSKeyedUnarchiver.unarchiveObjectWithData(cleartextVaultBytes!) as? Vault
+        guard vault != nil else {
+            print("failed to un-archive the Vault: " + fileUrl.path!)
+            return false;
         }
         
-        return unpackFileData(fileData)
+        return true
     }
     
     func save() -> Bool
     {
-        let fileData = packFileData()
+        guard vault != nil else { return false }
         
+        encryptWithPassphrase()
+        updateFileUrl()
+        
+        let fileData = pack()
         do {
             try fileData.writeToURL(fileUrl, options: [.DataWritingAtomic, .DataWritingFileProtectionComplete])
         }
@@ -54,7 +76,7 @@ class VaultFile {
         return true
     }
     
-    private func unpackFileData(fileData: NSData) -> Bool
+    private func unpack(fileData: NSData) -> Bool
     {
         let aesCryptor = AESCryptor.createWithAlgorithm(AES128)
         let saltSize = Int(aesCryptor.saltSize)
@@ -72,28 +94,18 @@ class VaultFile {
             return false
         }
         
-        guard let encryptedVaultBytes = fileData.safeSubdataWithRange(NSRange(location: saltSize + blockSize,
-            length: fileData.length - (saltSize + blockSize))) else {
+        encryptedVaultData = fileData.safeSubdataWithRange(NSRange(location: saltSize + blockSize,
+            length: fileData.length - (saltSize + blockSize)))
+        guard encryptedVaultData != nil else {
                 print("unable to unpack the encrypted vault bytes")
                 return false
-        }
-        
-        let key = aesCryptor.generateKeyFromPassphrase(SecurityContext.sharedInstance.mainPassphrase, andSalt: salt)
-        let cleartextVaultBytes = aesCryptor.decrypt(encryptedVaultBytes, withKey: key, initializationVector: iv)
-
-        vault = NSKeyedUnarchiver.unarchiveObjectWithData(cleartextVaultBytes!) as? Vault
-        guard vault != nil else {
-            print("failed to un-archive the Vault: " + fileUrl.path!)
-            return false;
         }
         
         return true
     }
     
-    private func packFileData() -> NSData
+    private func encryptWithPassphrase()
     {
-        let fileData = NSMutableData()
-        
         let aesCryptor = AESCryptor.createWithAlgorithm(AES128)
         if salt == nil || iv == nil {
             salt = aesCryptor.generateSalt()
@@ -102,7 +114,12 @@ class VaultFile {
         
         let vaultData = NSKeyedArchiver.archivedDataWithRootObject(vault!)
         let encryptionKey = aesCryptor.generateKeyFromPassphrase(SecurityContext.sharedInstance.getPassphraseForVault(vault), andSalt: salt!)
-        let encryptedVaultData = aesCryptor.encrypt(vaultData, withKey: encryptionKey, initializationVector: iv!)
+        encryptedVaultData = aesCryptor.encrypt(vaultData, withKey: encryptionKey, initializationVector: iv!)
+    }
+    
+    private func pack() -> NSData
+    {
+        let fileData = NSMutableData()
         
         fileData.appendData(salt)
         fileData.appendData(iv)

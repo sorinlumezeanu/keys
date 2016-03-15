@@ -12,25 +12,27 @@ class SecretsTVC: UITableViewController {
     
     struct Constants {
         static let VaultTableCellIdentifier = "VaultTableCellIdentifier"
+        static let AddVaultSegueId = "AddVault2"
     }
-
+    
+    @IBAction func cancelAddVault(segue: UIStoryboardSegue) {
+        print("cancelAddVault")
+    }
+    
+    @IBAction func saveAddVault(segue: UIStoryboardSegue) {
+        let addVaultVC = segue.sourceViewController as! AddVaultTVC
+        SecurityContext.sharedInstance.setPassphraseForVault(addVaultVC.vault, passphrase: addVaultVC.password)
+        Repository.addVaultFile(VaultFile(withVault: addVaultVC.vault))
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.navigationItem.title = "spanac"
         
+        // Do any additional setup after loading the view.
+        self.navigationItem.hidesBackButton = true
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -44,13 +46,13 @@ class SecretsTVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Repository.getVaults().count
+        return Repository.vaultFiles.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.VaultTableCellIdentifier, forIndexPath: indexPath) as! SettingsTVCell
 
-        let vaultFile = Repository.getVaults()[indexPath.row]
+        let vaultFile = Repository.vaultFiles[indexPath.row]
         let vault = vaultFile.vault!
         
         cell.vaultName?.text = vault.description

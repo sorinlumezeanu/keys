@@ -10,26 +10,16 @@ import UIKit
 
 class SecretsNavController: UINavigationController {
 
-    struct Constants {
+    private struct Constants {
         static let ShowZeroVaultsSegueId = "ShowZeroVaultsVC"
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch (segue.identifier!) {
         case Constants.ShowZeroVaultsSegueId:
-            print("here")
+            break
         default:
             break
-        }
-    }
-
-    func setup() {
-        let numberOfVaultFiles = Repository.peekNumberOfVaultFiles()
-        if numberOfVaultFiles == 3 {
-            // load the 'Zero Vaults' view controller
-            performSegueWithIdentifier(Constants.ShowZeroVaultsSegueId, sender: nil)
-        } else {
-            // load the 'Secrets' table view controller
         }
     }
 }

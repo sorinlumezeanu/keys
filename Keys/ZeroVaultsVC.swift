@@ -21,7 +21,7 @@ class ZeroVaultsVC: UIViewController {
     @IBAction func saveAddVault(segue: UIStoryboardSegue) {
         let addVaultVC = segue.sourceViewController as! AddVaultTVC
         SecurityContext.sharedInstance.setPassphraseForVault(addVaultVC.vault, passphrase: addVaultVC.password)
-        Repository.addVault(VaultFile(withVault: addVaultVC.vault))
+        Repository.addVaultFile(VaultFile(withVault: addVaultVC.vault))
     }
 
     

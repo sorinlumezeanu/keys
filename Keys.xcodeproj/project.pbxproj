@@ -18,6 +18,7 @@
 		FF9231591C9420890047CA4E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9231581C9420890047CA4E /* MainTabBarController.swift */; };
 		FF92315B1C942A9C0047CA4E /* SecretsNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF92315A1C942A9C0047CA4E /* SecretsNavController.swift */; };
 		FF92315D1C9431780047CA4E /* EditVaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF92315C1C9431780047CA4E /* EditVaultVC.swift */; };
+		FFA6C46C1C9698A20018F5CE /* GetPassphraseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA6C46B1C9698A20018F5CE /* GetPassphraseVC.swift */; };
 		FFB664721C877A8800D0157B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664711C877A8800D0157B /* AppDelegate.swift */; };
 		FFB664761C877A8800D0157B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664751C877A8800D0157B /* SecondViewController.swift */; };
 		FFB664791C877A8800D0157B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFB664771C877A8800D0157B /* Main.storyboard */; };
@@ -66,6 +67,7 @@
 		FF9231581C9420890047CA4E /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		FF92315A1C942A9C0047CA4E /* SecretsNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretsNavController.swift; sourceTree = "<group>"; };
 		FF92315C1C9431780047CA4E /* EditVaultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditVaultVC.swift; sourceTree = "<group>"; };
+		FFA6C46B1C9698A20018F5CE /* GetPassphraseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPassphraseVC.swift; sourceTree = "<group>"; };
 		FFB6646E1C877A8800D0157B /* Keys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFB664711C877A8800D0157B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFB664751C877A8800D0157B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
@@ -222,14 +224,15 @@
 		FFD980AF1C8860D8004DF3D2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FFB664751C877A8800D0157B /* SecondViewController.swift */,
+				FF9231581C9420890047CA4E /* MainTabBarController.swift */,
+				FFA6C46B1C9698A20018F5CE /* GetPassphraseVC.swift */,
+				FF92315A1C942A9C0047CA4E /* SecretsNavController.swift */,
+				FF086F501C907760002C78F0 /* ZeroVaultsVC.swift */,
 				FFD980B01C88610D004DF3D2 /* SecretsTVC.swift */,
 				FF89C05D1C8C16A800779E5D /* SettingsTVCell.swift */,
-				FF086F501C907760002C78F0 /* ZeroVaultsVC.swift */,
-				FF9231581C9420890047CA4E /* MainTabBarController.swift */,
-				FF92315A1C942A9C0047CA4E /* SecretsNavController.swift */,
-				FF92315C1C9431780047CA4E /* EditVaultVC.swift */,
 				FF4B549D1C945EBA00522159 /* AddVaultTVC.swift */,
+				FFB664751C877A8800D0157B /* SecondViewController.swift */,
+				FF92315C1C9431780047CA4E /* EditVaultVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				FFB664761C877A8800D0157B /* SecondViewController.swift in Sources */,
 				FF086F511C907760002C78F0 /* ZeroVaultsVC.swift in Sources */,
 				FF086F4E1C9000BC002C78F0 /* SecurityContext.swift in Sources */,
+				FFA6C46C1C9698A20018F5CE /* GetPassphraseVC.swift in Sources */,
 				FFB664A51C87800B00D0157B /* Secret.swift in Sources */,
 				FF63D9CA1C8F2E0700C3548C /* NSData+Extension.swift in Sources */,
 				FF4B549E1C945EBA00522159 /* AddVaultTVC.swift in Sources */,
