@@ -18,11 +18,11 @@ class ZeroVaultsVC: UIViewController {
         print("cancelAddVault")
     }
     
-    @IBAction func saveAddVault(segue: UIStoryboardSegue) {
-        let addVaultVC = segue.sourceViewController as! AddVaultTVC
-        SecurityContext.sharedInstance.setPassphraseForVault(addVaultVC.vault, passphrase: addVaultVC.password)
-        Repository.addVaultFile(VaultFile(withVault: addVaultVC.vault))
-    }
+//    @IBAction func saveAddVault(segue: UIStoryboardSegue) {
+//        let addVaultVC = segue.sourceViewController as! AddVaultTVC
+//        SecurityContext.sharedInstance.setPassphraseForVault(addVaultVC.vault, passphrase: addVaultVC.password)
+//        Repository.addVaultFile(VaultFile(withVault: addVaultVC.vault))
+//    }
 
     
     override func viewDidLoad() {

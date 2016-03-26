@@ -15,6 +15,15 @@ class Repository
     private static var fileManager = NSFileManager.defaultManager()
     private static var urlForDocumentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     
+    class func countUnlockedVaultFiles() -> Int {
+        var count = 0
+        for vaultFile in vaultFiles {
+            if !vaultFile.isLocked {
+                count++
+            }
+        }
+        return count
+    }
     
     class func loadVaultFiles()
     {

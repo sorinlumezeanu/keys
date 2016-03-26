@@ -15,17 +15,16 @@ class SecurityContext {
         passphrasesByVaultUuid = [String: String]()
     }
     
-    var mainPassphrase: String!    
     private var passphrasesByVaultUuid: [String: String]!
     
     func getPassphraseForVault(vault: Vault) -> String? {
         if passphrasesByVaultUuid.keys.contains(vault.uuid) {
             return passphrasesByVaultUuid[vault.uuid]
         }
-        return mainPassphrase
+        return nil
     }
     
     func setPassphraseForVault(vault: Vault, passphrase: String) {
         passphrasesByVaultUuid[vault.uuid] = passphrase
-    }
+    }    
 }

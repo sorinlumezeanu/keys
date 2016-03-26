@@ -14,6 +14,14 @@ class VaultFile {
         return fileUrl != nil && salt != nil && iv != nil && encryptedVaultData != nil
     }
     
+    var isLocked: Bool {
+        return (vault == nil)
+    }
+    
+    var name: String {
+        return vault != nil ? vault.name : (fileUrl!.pathComponents?.last!)!
+    }
+    
     private(set) var fileUrl: NSURL!
     private(set) var vault: Vault!
     private(set) var salt: NSData!
@@ -47,7 +55,7 @@ class VaultFile {
         let aesCryptor = AESCryptor.createWithAlgorithm(AES128)
         let key = aesCryptor.generateKeyFromPassphrase(passphrase, andSalt: salt)
         let cleartextVaultBytes = aesCryptor.decrypt(encryptedVaultData, withKey: key, initializationVector: iv)
-
+        
         vault = NSKeyedUnarchiver.unarchiveObjectWithData(cleartextVaultBytes!) as? Vault
         guard vault != nil else {
             print("failed to un-archive the Vault: " + fileUrl.path!)

@@ -11,7 +11,7 @@ import UIKit
 class GetPassphraseVC: UIViewController, UITextFieldDelegate {
     
     private struct Constants {
-        static let ShowMainScreenSegueId = "ShowMainScreen"
+        static let DismissGetPassphraseVCSegueId = "DismissGetPassphraseVC"
     }
 
     @IBOutlet weak var passphraseTextField: UITextField!
@@ -26,26 +26,26 @@ class GetPassphraseVC: UIViewController, UITextFieldDelegate {
         let passphrase = passphraseTextField.text!
         let vaultFiles = Repository.vaultFiles
         
-        var shouldAdvanceToMainScreen = false
+        var shouldDismissVC = false
         for vaultFile in vaultFiles {
             if vaultFile.decryptWithPassphrase(passphrase) {
-                shouldAdvanceToMainScreen = true
+                shouldDismissVC = true
                 SecurityContext.sharedInstance.setPassphraseForVault(vaultFile.vault, passphrase: passphrase)
             }
         }
         
-        if shouldAdvanceToMainScreen {
-            advanceToMainScreen()
+        if shouldDismissVC {
+            dismiss()
         }
     }
     
-    func advanceToMainScreen() {
-        performSegueWithIdentifier(Constants.ShowMainScreenSegueId, sender: nil)
+    func dismiss() {
+        performSegueWithIdentifier(Constants.DismissGetPassphraseVCSegueId, sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segue.identifier! {
-        case Constants.ShowMainScreenSegueId:
+        case Constants.DismissGetPassphraseVCSegueId:
             break
         default:
             break

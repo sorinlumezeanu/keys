@@ -1,43 +1,46 @@
 //
-//  SecretsTVC.swift
+//  VaultTVC.swift
 //  Keys
 //
-//  Created by Sorin Lumezeanu on 3/3/16.
+//  Created by Sorin Lumezeanu on 3/16/16.
 //  Copyright © 2016 Sorin Lumezeanu. All rights reserved.
 //
 
 import UIKit
 
-class SecretsTVC: UITableViewController {
-    
-    struct Constants {
-        static let VaultTableCellIdentifier = "VaultTableCellIdentifier"
-        static let AddVaultSegueId = "AddVault2"
+class VaultTVC: UITableViewController {
+
+    private struct Constants {
+        static let SecretCellIdentifier = "SecretCellIdentifier"
+        static let AddSecretCellIdentifier = "AddSecretCellIdentifier"
+        static let AddSecretSegueId = "AddSecretSegueId"
     }
     
-    @IBAction func cancelAddVault(segue: UIStoryboardSegue) {
-        print("cancelAddVault")
-    }
-    
-    @IBAction func saveAddVault(segue: UIStoryboardSegue) {
-        let addVaultVC = segue.sourceViewController as! AddVaultTVC
-        SecurityContext.sharedInstance.setPassphraseForVault(addVaultVC.vault, passphrase: addVaultVC.password)
-        Repository.addVaultFile(VaultFile(withVault: addVaultVC.vault))
-    }
-    
+    var vault: Vault!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        self.navigationItem.hidesBackButton = true
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
+        self.navigationItem.title = vault.name
+    }
+    
+    @IBAction func addRecord() {
+        self.performSegueWithIdentifier(Constants.AddSecretSegueId, sender: self)
+    }
+    
+    @IBAction func saveAddSecret(segue: UIStoryboardSegue) {
+        if let secret = (segue.sourceViewController as? AddSecretVC)?.secret {
+            self.vault.addSecret(secret)
+            self.tableView.reloadData()
+        }
     }
 
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tableView.reloadData()
-    }
 
     // MARK: - Table view data source
 
@@ -46,19 +49,22 @@ class SecretsTVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Repository.vaultFiles.count
+        return self.vault.secrets.count + 1     // the last one is for the 'Add Secret' cell
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.VaultTableCellIdentifier, forIndexPath: indexPath) as! SettingsTVCell
-
-        let vaultFile = Repository.vaultFiles[indexPath.row]
-        let vault = vaultFile.vault!
         
-        cell.vaultName?.text = vault.description
-        cell.vaultSummary?.text = vault.summary
+        switch indexPath.row {
+        case let row where row < self.vault.secrets.count:
+            let cell = tableView.dequeueReusableCellWithIdentifier(Constants.SecretCellIdentifier, forIndexPath: indexPath)
+            let secret = self.vault.secrets[row]
+            cell.textLabel?.text = secret.description
+            return cell
 
-        return cell
+        default:
+            let cell = tableView.dequeueReusableCellWithIdentifier(Constants.AddSecretCellIdentifier, forIndexPath: indexPath)            
+            return cell
+        }
     }
 
     /*

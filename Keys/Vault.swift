@@ -34,6 +34,10 @@ class Vault: NSObject, NSCoding {
         coder.encodeObject(secrets, forKey: "secrets")
     }
     
+    func addSecret(secret: Secret) {
+        self.secrets.append(secret)
+    }
+    
     override var description: String {
         return "\(name): (\(secrets.count))"
     }
