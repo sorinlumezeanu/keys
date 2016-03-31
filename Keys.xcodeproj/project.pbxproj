@@ -10,12 +10,12 @@
 		FF086F4E1C9000BC002C78F0 /* SecurityContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF086F4D1C9000BC002C78F0 /* SecurityContext.swift */; };
 		FF086F511C907760002C78F0 /* ZeroVaultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF086F501C907760002C78F0 /* ZeroVaultsVC.swift */; };
 		FF4B549E1C945EBA00522159 /* AddVaultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4B549D1C945EBA00522159 /* AddVaultTVC.swift */; };
-		FF5C526C1C99AC2600916E1B /* VaultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C526B1C99AC2600916E1B /* VaultTVC.swift */; };
+		FF5C526C1C99AC2600916E1B /* VaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C526B1C99AC2600916E1B /* VaultVC.swift */; };
 		FF63D9C41C8ED5B400C3548C /* NSData+ErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = FF63D9C31C8ED5B400C3548C /* NSData+ErrorHandling.m */; };
 		FF63D9C71C8EF45C00C3548C /* NSException+Convertor.m in Sources */ = {isa = PBXBuildFile; fileRef = FF63D9C61C8EF45C00C3548C /* NSException+Convertor.m */; };
 		FF63D9CA1C8F2E0700C3548C /* NSData+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63D9C91C8F2E0700C3548C /* NSData+Extension.swift */; };
 		FF6692AE1CA0805A0092241D /* AddSecretFieldValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6692AD1CA0805A0092241D /* AddSecretFieldValueCell.swift */; };
-		FF89C05E1C8C16A800779E5D /* VaultTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89C05D1C8C16A800779E5D /* VaultTVCell.swift */; };
+		FF89C05E1C8C16A800779E5D /* VaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89C05D1C8C16A800779E5D /* VaultCell.swift */; };
 		FF89C0631C8C2D9A00779E5D /* AESCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FF89C0621C8C2D9A00779E5D /* AESCryptor.m */; };
 		FFA6C46C1C9698A20018F5CE /* GetPassphraseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA6C46B1C9698A20018F5CE /* GetPassphraseVC.swift */; };
 		FFB664721C877A8800D0157B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664711C877A8800D0157B /* AppDelegate.swift */; };
@@ -29,9 +29,10 @@
 		FFB664A51C87800B00D0157B /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664A41C87800B00D0157B /* Secret.swift */; };
 		FFB664A71C8780DB00D0157B /* SecretField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664A61C8780DB00D0157B /* SecretField.swift */; };
 		FFB664A91C8784DF00D0157B /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664A81C8784DF00D0157B /* Repository.swift */; };
+		FFBA520B1CAAFEFA001D4B33 /* SecretCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBA520A1CAAFEF9001D4B33 /* SecretCell.swift */; };
 		FFD8440D1C9D714500D46E7F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD8440C1C9D714500D46E7F /* Image.swift */; };
 		FFD8440F1C9D7FEA00D46E7F /* AddSecretVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD8440E1C9D7FEA00D46E7F /* AddSecretVC.swift */; };
-		FFD980B11C88610D004DF3D2 /* VaultsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD980B01C88610D004DF3D2 /* VaultsTVC.swift */; };
+		FFD980B11C88610D004DF3D2 /* VaultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD980B01C88610D004DF3D2 /* VaultsVC.swift */; };
 		FFE568A91CA5D7D2009FC98A /* AddSecretFieldTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE568A81CA5D7D2009FC98A /* AddSecretFieldTypeCell.swift */; };
 		FFE568AB1CA5D7E7009FC98A /* AddSecretFieldGenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE568AA1CA5D7E7009FC98A /* AddSecretFieldGenericCell.swift */; };
 		FFE568AD1CA5D88B009FC98A /* AddSecretFieldBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE568AC1CA5D88B009FC98A /* AddSecretFieldBaseCell.swift */; };
@@ -62,14 +63,14 @@
 		FF086F4D1C9000BC002C78F0 /* SecurityContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityContext.swift; sourceTree = "<group>"; };
 		FF086F501C907760002C78F0 /* ZeroVaultsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZeroVaultsVC.swift; sourceTree = "<group>"; };
 		FF4B549D1C945EBA00522159 /* AddVaultTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVaultTVC.swift; sourceTree = "<group>"; };
-		FF5C526B1C99AC2600916E1B /* VaultTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultTVC.swift; sourceTree = "<group>"; };
+		FF5C526B1C99AC2600916E1B /* VaultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultVC.swift; sourceTree = "<group>"; };
 		FF63D9C21C8ED5B400C3548C /* NSData+ErrorHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ErrorHandling.h"; sourceTree = "<group>"; };
 		FF63D9C31C8ED5B400C3548C /* NSData+ErrorHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ErrorHandling.m"; sourceTree = "<group>"; };
 		FF63D9C51C8EF45C00C3548C /* NSException+Convertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSException+Convertor.h"; sourceTree = "<group>"; };
 		FF63D9C61C8EF45C00C3548C /* NSException+Convertor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSException+Convertor.m"; sourceTree = "<group>"; };
 		FF63D9C91C8F2E0700C3548C /* NSData+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Extension.swift"; sourceTree = "<group>"; };
 		FF6692AD1CA0805A0092241D /* AddSecretFieldValueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSecretFieldValueCell.swift; sourceTree = "<group>"; };
-		FF89C05D1C8C16A800779E5D /* VaultTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultTVCell.swift; sourceTree = "<group>"; };
+		FF89C05D1C8C16A800779E5D /* VaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultCell.swift; sourceTree = "<group>"; };
 		FF89C0611C8C2D9A00779E5D /* Keys-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Keys-Bridging-Header.h"; sourceTree = "<group>"; };
 		FF89C0621C8C2D9A00779E5D /* AESCryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCryptor.m; sourceTree = "<group>"; };
 		FF89C0641C8C2FE200779E5D /* AESCryptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AESCryptor.h; sourceTree = "<group>"; };
@@ -91,9 +92,10 @@
 		FFB664A41C87800B00D0157B /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		FFB664A61C8780DB00D0157B /* SecretField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretField.swift; sourceTree = "<group>"; };
 		FFB664A81C8784DF00D0157B /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		FFBA520A1CAAFEF9001D4B33 /* SecretCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretCell.swift; sourceTree = "<group>"; };
 		FFD8440C1C9D714500D46E7F /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		FFD8440E1C9D7FEA00D46E7F /* AddSecretVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSecretVC.swift; sourceTree = "<group>"; };
-		FFD980B01C88610D004DF3D2 /* VaultsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultsTVC.swift; sourceTree = "<group>"; };
+		FFD980B01C88610D004DF3D2 /* VaultsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultsVC.swift; sourceTree = "<group>"; };
 		FFD980B21C8868D3004DF3D2 /* Readme */ = {isa = PBXFileReference; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
 		FFE568A81CA5D7D2009FC98A /* AddSecretFieldTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSecretFieldTypeCell.swift; sourceTree = "<group>"; };
 		FFE568AA1CA5D7E7009FC98A /* AddSecretFieldGenericCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSecretFieldGenericCell.swift; sourceTree = "<group>"; };
@@ -239,12 +241,12 @@
 		FFB664A11C877DA700D0157B /* Vaults */ = {
 			isa = PBXGroup;
 			children = (
-				FFB664A21C877DCB00D0157B /* Vault.swift */,
+				FFB664A81C8784DF00D0157B /* Repository.swift */,
 				FFF5E49C1C89C68500CD7DF5 /* VaultFile.swift */,
+				FFB664A21C877DCB00D0157B /* Vault.swift */,
 				FFB664A41C87800B00D0157B /* Secret.swift */,
 				FFB664A61C8780DB00D0157B /* SecretField.swift */,
 				FFD8440C1C9D714500D46E7F /* Image.swift */,
-				FFB664A81C8784DF00D0157B /* Repository.swift */,
 			);
 			name = Vaults;
 			sourceTree = "<group>";
@@ -253,12 +255,13 @@
 			isa = PBXGroup;
 			children = (
 				FF6692AC1CA080260092241D /* Add Secret Cells */,
-				FFD980B01C88610D004DF3D2 /* VaultsTVC.swift */,
-				FF89C05D1C8C16A800779E5D /* VaultTVCell.swift */,
+				FFD980B01C88610D004DF3D2 /* VaultsVC.swift */,
+				FF89C05D1C8C16A800779E5D /* VaultCell.swift */,
 				FFA6C46B1C9698A20018F5CE /* GetPassphraseVC.swift */,
 				FF086F501C907760002C78F0 /* ZeroVaultsVC.swift */,
 				FF4B549D1C945EBA00522159 /* AddVaultTVC.swift */,
-				FF5C526B1C99AC2600916E1B /* VaultTVC.swift */,
+				FF5C526B1C99AC2600916E1B /* VaultVC.swift */,
+				FFBA520A1CAAFEF9001D4B33 /* SecretCell.swift */,
 				FFD8440E1C9D7FEA00D46E7F /* AddSecretVC.swift */,
 				FFB664751C877A8800D0157B /* SecondViewController.swift */,
 				FFE73D8B1CA2B62C0061B2BD /* MenuVC.swift */,
@@ -408,12 +411,13 @@
 				FFE568A91CA5D7D2009FC98A /* AddSecretFieldTypeCell.swift in Sources */,
 				FF63D9CA1C8F2E0700C3548C /* NSData+Extension.swift in Sources */,
 				FFD8440D1C9D714500D46E7F /* Image.swift in Sources */,
-				FF5C526C1C99AC2600916E1B /* VaultTVC.swift in Sources */,
+				FF5C526C1C99AC2600916E1B /* VaultVC.swift in Sources */,
 				FFE568B11CA5D9F8009FC98A /* AddSecretFieldAddCell.swift in Sources */,
+				FFBA520B1CAAFEFA001D4B33 /* SecretCell.swift in Sources */,
 				FF4B549E1C945EBA00522159 /* AddVaultTVC.swift in Sources */,
 				FF63D9C41C8ED5B400C3548C /* NSData+ErrorHandling.m in Sources */,
 				FFE568AF1CA5D99E009FC98A /* AddSecretFieldNoteCell.swift in Sources */,
-				FF89C05E1C8C16A800779E5D /* VaultTVCell.swift in Sources */,
+				FF89C05E1C8C16A800779E5D /* VaultCell.swift in Sources */,
 				FFB664A91C8784DF00D0157B /* Repository.swift in Sources */,
 				FFD8440F1C9D7FEA00D46E7F /* AddSecretVC.swift in Sources */,
 				FFB664A71C8780DB00D0157B /* SecretField.swift in Sources */,
@@ -421,7 +425,7 @@
 				FFB664A31C877DCB00D0157B /* Vault.swift in Sources */,
 				FFE73D8C1CA2B62C0061B2BD /* MenuVC.swift in Sources */,
 				FFF5E49D1C89C68500CD7DF5 /* VaultFile.swift in Sources */,
-				FFD980B11C88610D004DF3D2 /* VaultsTVC.swift in Sources */,
+				FFD980B11C88610D004DF3D2 /* VaultsVC.swift in Sources */,
 				FF89C0631C8C2D9A00779E5D /* AESCryptor.m in Sources */,
 				FF63D9C71C8EF45C00C3548C /* NSException+Convertor.m in Sources */,
 			);

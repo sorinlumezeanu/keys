@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VaultTVCell: UITableViewCell {
+class VaultCell: UITableViewCell {
 
     var vaultFile: VaultFile!
     

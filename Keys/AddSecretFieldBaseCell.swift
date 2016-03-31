@@ -12,14 +12,20 @@ protocol AddSecretFieldCellDelegate: class {
     func onKeyboardReturnPressed(cell: AddSecretFieldBaseCell)
 }
 
+protocol AddSecretFieldCellDataSource: class {
+    func receiveValue(value: String?)
+    func getDisplayLabel() -> String
+    func getDisplayValue() -> String?
+}
+
 class AddSecretFieldBaseCell: UITableViewCell {
     
-    private(set) var rowDescriptor: AddSecretVC.RowDescriptor!
     private(set) weak var delegate: AddSecretFieldCellDelegate!
+    private(set) weak var dataSource: AddSecretFieldCellDataSource!
 
-    func setup(delegate delegate: AddSecretFieldCellDelegate, rowDescriptor: AddSecretVC.RowDescriptor) {
+    func setup(delegate delegate: AddSecretFieldCellDelegate, dataSource: AddSecretFieldCellDataSource) {
         self.delegate = delegate
-        self.rowDescriptor = rowDescriptor
+        self.dataSource = dataSource
     }
     
     func didSelectCell() {

@@ -34,19 +34,52 @@ class Vault: NSObject, NSCoding {
         coder.encodeObject(secrets, forKey: "secrets")
     }
     
-    func addSecret(secret: Secret) {
+    subscript(indexPath: NSIndexPath) -> Secret? {
+        get {
+            guard indexPath.section == 0 && indexPath.row < self.secrets.count else { return nil }
+            return self.secrets[indexPath.row]
+        }
+    }
+    
+    // MARK: - Modify Actions
+    
+    private var backupSecrets: [Secret]?
+    
+    private func ensureBackup() {
+        if self.backupSecrets == nil {
+            self.backupSecrets = self.secrets
+        }
+    }
+    
+    func remove(secret secret: Secret) {
+        self.ensureBackup()
+        if let index = self.secrets.indexOf({ $0.uuid == secret.uuid }) {
+            self.secrets.removeAtIndex(index)
+        }
+    }
+    
+    func append(secret secret: Secret) {
+        self.ensureBackup()
         self.secrets.append(secret)
     }
     
-    override var description: String {
-        return "\(name): (\(secrets.count))"
+    func move(secret secret: Secret, toIndex: Int) {
+        guard let sourceIndex = self.secrets.indexOf({ $0.uuid == secret.uuid }) else { return }
+        guard toIndex >= 0 && toIndex < self.secrets.count else { return }
+        self.ensureBackup()        
+
+        self.secrets.removeAtIndex(sourceIndex)
+        self.secrets.insert(secret, atIndex: toIndex)
     }
     
-    var summary: String {
-        var summary = ""
-        for secret in secrets {
-            summary += secret.description + "\r\n"
+    func discardChanges() {
+        if self.backupSecrets != nil {
+            self.secrets = self.backupSecrets!
         }
-        return summary
+        self.backupSecrets = nil
+    }
+    
+    func commitChanges() {
+        self.backupSecrets = nil
     }
 }

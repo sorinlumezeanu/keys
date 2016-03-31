@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VaultsTVC: UITableViewController {
+class VaultsVC: UITableViewController {
     
     struct Constants {
         static let VaultTableCellIdentifier = "VaultTableCellIdentifier"
@@ -68,7 +68,7 @@ class VaultsTVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.VaultTableCellIdentifier, forIndexPath: indexPath) as! VaultTVCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.VaultTableCellIdentifier, forIndexPath: indexPath) as! VaultCell
 
         let vaultFile = Repository.vaultFiles[indexPath.row]
         cell.setup(vaultFile)
@@ -119,9 +119,9 @@ class VaultsTVC: UITableViewController {
         case Constants.AddVaultSegueId:
             break
         case Constants.ShowVaultSegueId:
-            if let selectedVaultCell = sender as? VaultTVCell {
-                if let vaultVC = segue.destinationViewController as? VaultTVC {
-                    vaultVC.vault = selectedVaultCell.vaultFile.vault
+            if let selectedVaultCell = sender as? VaultCell {
+                if let vaultVC = segue.destinationViewController as? VaultVC {
+                    vaultVC.vaultFile = selectedVaultCell.vaultFile
                 }
             }
             break

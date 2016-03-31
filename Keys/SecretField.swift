@@ -23,23 +23,20 @@ class SecretField: NSObject, NSCoding {
     }
     
     var type: Type2
-    var position: Int
-    var label = ""
-    var value = ""
+    var label: String?
+    var value: String?
     var image: Image?
     
-    init(withType type: Type2, position: Int)
+    init(withType type: Type2)
     {
         self.type = type
-        self.position = position
     }
     
     required convenience init?(coder decoder: NSCoder) {
         guard let typeRawValue = decoder.decodeObjectForKey("type") as? String else { return nil }
         guard let type = Type2(rawValue: typeRawValue) else { return nil }
-        guard let position = decoder.decodeObjectForKey("position") as? Int else { return nil }
         
-        self.init(withType: type, position: position)
+        self.init(withType: type)
         
         if let label = decoder.decodeObjectForKey("label") as? String {
             self.label = label
@@ -54,9 +51,12 @@ class SecretField: NSObject, NSCoding {
     
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.type.rawValue, forKey: "type")
-        coder.encodeObject(self.position, forKey: "position")
-        coder.encodeObject(self.label, forKey: "label")
-        coder.encodeObject(self.value, forKey: "value")
+        if self.label != nil {
+            coder.encodeObject(self.label, forKey: "label")
+        }
+        if self.value != nil {
+            coder.encodeObject(self.value, forKey: "value")
+        }
         if self.image != nil {
             coder.encodeObject(self.image, forKey: "image")
         }

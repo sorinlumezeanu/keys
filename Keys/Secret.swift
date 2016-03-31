@@ -20,23 +20,26 @@ class Secret : NSObject, NSCoding {
         }
     }
     
+    var uuid: String
     var type: Type5
     var name: String
     var fields: [SecretField]
     
-    init(withType type: Type5, name: String)
+    init(withType type: Type5, name: String, uuid: String? = nil)
     {
+        self.uuid = uuid ?? NSUUID().UUIDString
         self.type = type
         self.name = name
         self.fields = [SecretField]()
     }
     
     required convenience init?(coder decoder: NSCoder) {
+        guard let uuid = decoder.decodeObjectForKey("uuid") as? String else { return nil }
         guard let typeRawValue = decoder.decodeObjectForKey("type") as? String else { return nil }
         guard let type = Type5(rawValue: typeRawValue) else { return nil }
         guard let name = decoder.decodeObjectForKey("name") as? String else { return nil }
         
-        self.init(withType: type, name: name)
+        self.init(withType: type, name: name, uuid: uuid)
         
         if let fields = decoder.decodeObjectForKey("fields") as? [SecretField] {
             self.fields += fields
@@ -44,6 +47,7 @@ class Secret : NSObject, NSCoding {
     }
     
     func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(uuid, forKey: "uuid")
         coder.encodeObject(type.rawValue, forKey: "type")
         coder.encodeObject(name, forKey: "name")
         coder.encodeObject(fields, forKey: "fields")
@@ -68,20 +72,20 @@ class Secret : NSObject, NSCoding {
 
         switch (type) {
         case .Login:
-            secret.fields.append(SecretField(withType: .System, position: 0))
-            secret.fields.append(SecretField(withType: .Url, position: 1))
-            secret.fields.append(SecretField(withType: .Username, position: 2))
-            secret.fields.append(SecretField(withType: .Password, position: 3))
+            secret.fields.append(SecretField(withType: .System))
+            secret.fields.append(SecretField(withType: .Url))
+            secret.fields.append(SecretField(withType: .Username))
+            secret.fields.append(SecretField(withType: .Password))
             return secret
             
         case .Note:
-            secret.fields.append(SecretField(withType: .NoteTitle, position: 0))
-            secret.fields.append(SecretField(withType: .NoteParagraph, position: 1))
+            secret.fields.append(SecretField(withType: .NoteTitle))
+            secret.fields.append(SecretField(withType: .NoteParagraph))
             return secret
             
         default:
-            secret.fields.append(SecretField(withType: .System, position: 0))
-            secret.fields.append(SecretField(withType: .NoteParagraph, position: 1))
+            secret.fields.append(SecretField(withType: .System))
+            secret.fields.append(SecretField(withType: .NoteParagraph))
         }
         
         return secret

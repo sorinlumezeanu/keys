@@ -11,10 +11,10 @@ import UIKit
 class AddSecretFieldTypeCell: AddSecretFieldBaseCell {
 
     @IBOutlet weak var valueLabel: UILabel!
-
-    override func setup(delegate delegate: AddSecretFieldCellDelegate, rowDescriptor: AddSecretVC.RowDescriptor) {
-        super.setup(delegate: delegate, rowDescriptor: rowDescriptor)
+    
+    override func setup(delegate delegate: AddSecretFieldCellDelegate, dataSource: AddSecretFieldCellDataSource) {
+        super.setup(delegate: delegate, dataSource: dataSource)
         
-        self.valueLabel.text = rowDescriptor.recordDescriptor.secret.type.rawValue
+        self.valueLabel.text = self.dataSource.getDisplayLabel()
     }
 }

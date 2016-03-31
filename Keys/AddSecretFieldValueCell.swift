@@ -12,11 +12,25 @@ class AddSecretFieldValueCell: AddSecretFieldBaseCell, UITextFieldDelegate {
     
     @IBOutlet weak var valueTextField: UITextField!
     @IBOutlet weak var systemImageView: UIImageView!
+    @IBOutlet weak var errorImageView: UIImageView!
     
-    override func setup(delegate delegate: AddSecretFieldCellDelegate, rowDescriptor: AddSecretVC.RowDescriptor) {
-        super.setup(delegate: delegate, rowDescriptor: rowDescriptor)
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    override func setup(delegate delegate: AddSecretFieldCellDelegate, dataSource: AddSecretFieldCellDataSource) {
+        super.setup(delegate: delegate, dataSource: dataSource)
         
+        self.valueTextField.text = self.dataSource.getDisplayValue()
         self.valueTextField.delegate = self
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "textFieldTextChanged:",
+            name:UITextFieldTextDidChangeNotification,
+            object: self.valueTextField
+        )
     }
     
     @IBAction func addPhotoButtonTapped() {
@@ -26,7 +40,7 @@ class AddSecretFieldValueCell: AddSecretFieldBaseCell, UITextFieldDelegate {
     override func didSelectCell() {
         self.valueTextField.becomeFirstResponder()
     }
-
+    
     
     // MARK: - UITextFieldDelegate
     
@@ -35,7 +49,27 @@ class AddSecretFieldValueCell: AddSecretFieldBaseCell, UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        self.rowDescriptor.field?.value = textField.text!        
+    func textFieldTextChanged(sender : AnyObject) {
+        if self.errorImageView != nil {
+            self.errorImageView.hidden = !self.errorImageView.hidden
+        }
+        
+        if case let value = self.getValue() where self.validate(value: value) {
+            self.dataSource.receiveValue(value)
+        }
+        else {
+            self.dataSource.receiveValue(nil)
+        }
+    }
+    
+    // MARK: - Validation
+    
+    private func getValue() -> String? {
+        return self.valueTextField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    
+    private func validate(value value: String?) -> Bool {
+        guard value?.characters.count > 0 else { return false }
+        return true
     }
 }

@@ -37,7 +37,7 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
         
         self.activeRecordDescriptor = self.recordDescriptors[.Login]
     }
-
+    
     // MARK: - Navigation
     
     @IBAction func dismissMenu(segue: UIStoryboardSegue) {
@@ -48,6 +48,15 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
         if self.activeRecordDescriptor.secret.type != changeToSecretType {
             self.activeRecordDescriptor = self.recordDescriptors[changeToSecretType]
             self.tableView.reloadSections(NSIndexSet(indexesInRange: NSRange(location: 0, length: 1)), withRowAnimation: UITableViewRowAnimation.Fade)
+        }
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        switch identifier {
+        case Constants.SaveAddSecretSegueId:
+            return false
+        default:
+            return true
         }
     }
     
@@ -91,7 +100,7 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
             self.menuAnchor = cell.textLabel
         }
         
-        cell.setup(delegate: self, rowDescriptor: rowDescriptor)
+        cell.setup(delegate: self, dataSource: rowDescriptor)
         
         return cell
     }
@@ -108,9 +117,6 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddSecretFieldBaseCell
             cell.didSelectCell()
         }
-        
-        //  self.tableView.setEditing(true, animated: true)
-        //  self.tableView.setEditing(true, animated: true)
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -133,14 +139,6 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None
     }
-    
-//    func prepareForPopoverPresentation(popoverPresentationController: UIPopoverPresentationController) {
-//        print("prepare for presentation")
-//    }
-//    
-//    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-//        print("did dismiss")
-//    }
     
     func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
         return true
@@ -204,7 +202,7 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
     
     // MARK: - RowDescriptor
     
-    class RowDescriptor {
+    class RowDescriptor: AddSecretFieldCellDataSource {
         
         enum Type7 {
             case Field
@@ -296,6 +294,42 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
         
         var canMove: Bool {
             return self.canEdit
+        }
+        
+        // MARK: - AddSecretFieldCellDataSource
+        
+        func getDisplayLabel() -> String {
+            switch self.type {
+            case .RecordTypeSelection:
+                return self.recordDescriptor.secret.type.rawValue
+            case .AddField:
+                return "n/a"
+            case .Field:
+                return self.field!.label ?? self.field!.type.rawValue
+            }
+        }
+        
+        func getDisplayValue() -> String? {
+            switch self.type {
+            case .RecordTypeSelection:
+                return nil
+            case .AddField:
+                return nil
+            case .Field:
+                return self.field!.value ?? nil
+            }
+        }
+        
+        func receiveValue(value: String?) {
+            switch self.type {
+            case .RecordTypeSelection:
+                break
+            case .AddField:
+                break
+            case .Field:
+                print("received value: \(value)")
+                return self.field!.value = value
+            }
         }
     }
 }
