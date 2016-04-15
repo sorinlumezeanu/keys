@@ -72,20 +72,20 @@ class Secret : NSObject, NSCoding {
 
         switch (type) {
         case .Login:
-            secret.fields.append(SecretField(withType: .System))
-            secret.fields.append(SecretField(withType: .Url))
-            secret.fields.append(SecretField(withType: .Username))
-            secret.fields.append(SecretField(withType: .Password))
+            secret.fields.append(SecretField(withType: .System, mandatory: true))
+            secret.fields.append(SecretField(withType: .Url, mandatory: false))
+            secret.fields.append(SecretField(withType: .Username, mandatory: true))
+            secret.fields.append(SecretField(withType: .Password, mandatory: true))
             return secret
             
         case .Note:
-            secret.fields.append(SecretField(withType: .NoteTitle))
-            secret.fields.append(SecretField(withType: .NoteParagraph))
+            secret.fields.append(SecretField(withType: .NoteTitle, mandatory: true))
+            secret.fields.append(SecretField(withType: .NoteParagraph, mandatory: false))
             return secret
             
-        default:
-            secret.fields.append(SecretField(withType: .System))
-            secret.fields.append(SecretField(withType: .NoteParagraph))
+        case .Other:
+            secret.fields.append(SecretField(withType: .System, mandatory: true))
+            secret.fields.append(SecretField(withType: .NoteParagraph, mandatory: false))
         }
         
         return secret

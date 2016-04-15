@@ -19,7 +19,7 @@ class Repository
         var count = 0
         for vaultFile in vaultFiles {
             if !vaultFile.isLocked {
-                count++
+                count += 1
             }
         }
         return count
@@ -27,7 +27,7 @@ class Repository
     
     class func loadVaultFiles()
     {
-        print (urlForDocumentsDirectory.path)
+        //print (urlForDocumentsDirectory.path)
         
         vaultFiles = [VaultFile]()
         

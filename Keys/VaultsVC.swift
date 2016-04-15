@@ -36,7 +36,6 @@ class VaultsVC: UITableViewController {
     }
     
     @IBAction func dismissGetPassphraseVC(segue: UIStoryboardSegue) {
-        print("dismiss get passphrase")
     }
     
     @IBAction func cancelAddVault(segue: UIStoryboardSegue) {

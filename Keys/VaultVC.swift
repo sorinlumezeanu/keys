@@ -8,12 +8,19 @@
 
 import UIKit
 
+private extension Selector {
+    private static let doneButtonTapped = #selector(VaultVC.doneButtonTapped(_:))
+    private static let cancelButtonTapped = #selector(VaultVC.cancelButtonTapped(_:))
+    private static let editButtonTapped = #selector(VaultVC.editButtonTapped(_:))
+}
+
 class VaultVC: UITableViewController {
 
     private struct Constants {
         static let SecretCellIdentifier = "SecretCellIdentifier"
         static let AddSecretCellIdentifier = "AddSecretCellIdentifier"
         static let AddSecretSegueId = "AddSecretSegueId"
+        static let ShowSecretSegueId = "ShowSecret"
     }
     
     var vaultFile: VaultFile!
@@ -32,21 +39,14 @@ class VaultVC: UITableViewController {
         setEditing(self.editing, animated: false)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.navigationItem.rightBarButtonItems = []
-        self.navigationItem.leftBarButtonItems = []
-    }
-    
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
         if self.editing {
-            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonTapped:")]
-            self.navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelButtonTapped:")]
+            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: .doneButtonTapped)]
+            self.navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: .cancelButtonTapped)]
         } else {
-            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "editButtonTapped:")]
+            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: .editButtonTapped)]
             self.navigationItem.leftBarButtonItems = []
         }
     }
@@ -141,5 +141,34 @@ class VaultVC: UITableViewController {
 
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return indexPath.row < self.vaultFile.vault.secrets.count ? true : false
+    }
+    
+    // MARK: - Navigation
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        switch identifier {
+        case Constants.ShowSecretSegueId:
+            return (sender is SecretCell)
+        default:
+            return true
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segue.identifier! {
+        case Constants.ShowSecretSegueId:
+            if let secretCell = sender as? SecretCell {
+                let secretVC = segue.destinationViewController as! SecretVC
+                secretVC.secret = secretCell.secret
+                
+                if let systemField = secretVC.secret.fields.filter({ $0.type == .System}).first {
+                    if systemField.image?.image == nil {
+                        systemField.image = Image(withType: .Bundled, url: "error")
+                    }
+                }
+            }
+        default:
+            break
+        }
     }
 }

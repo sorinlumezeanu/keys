@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegate, AddSecretFieldCellDelegate {
+class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegate {
     
     private struct Constants {
         static let ShowMenuSecretTypeSegueId = "ShowMenuSecretType"
@@ -40,6 +40,41 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
     
     // MARK: - Navigation
     
+    func selectRow(indexPath indexPath: NSIndexPath) {
+        guard let rowDescriptor = self.activeRecordDescriptor[indexPath] else { return }
+        
+        switch rowDescriptor {
+        case let typeRowDescriptor where typeRowDescriptor is TypeRowDescriptor:
+            dispatch_async(dispatch_get_main_queue(), {
+                self.performSegueWithIdentifier(Constants.ShowMenuSecretTypeSegueId, sender: nil)
+            })
+            break
+            
+        case let secretFieldRowDescriptor where secretFieldRowDescriptor is SecretFieldRowDescriptor:
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            if let cell = self.tableView.cellForRowAtIndexPath(indexPath) {
+                if let valueCell = cell as? AddSecretValueCell {
+                    valueCell.beginUserInput()
+                }
+                if let noteCell = cell as? AddSecretNoteCell {
+                    noteCell.beginUserInput()
+                }
+            }
+            break
+            
+        case let addFieldRowDescriptor where addFieldRowDescriptor is AddFieldRowDescriptor:
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            self.addSecretFieldButtonTapped()
+            break
+        default:
+            break
+        }
+    }
+    
+    @IBAction func addSecretFieldButtonTapped() {
+        print("add secret field button tapped")
+    }
+    
     @IBAction func dismissMenu(segue: UIStoryboardSegue) {
         guard let menuVC = segue.sourceViewController as? MenuVC else { return }
         guard let selectedOption = menuVC.selectedOption else { return }
@@ -54,7 +89,15 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         switch identifier {
         case Constants.SaveAddSecretSegueId:
-            return false
+            let canSave = self.activeRecordDescriptor.canSave()
+            if canSave == false {
+                self.tableView.visibleCells.forEach { visibleCell in
+                    if let valueCell = visibleCell as? AddSecretValueCell {
+                        valueCell.updateErrorInfo()
+                    }
+                }
+            }
+            return canSave
         default:
             return true
         }
@@ -94,29 +137,17 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let rowDescriptor = self.activeRecordDescriptor[indexPath]!
-        let cell = tableView.dequeueReusableCellWithIdentifier(rowDescriptor.cellIdentifier, forIndexPath: indexPath) as! AddSecretFieldBaseCell
+        let cell = rowDescriptor.prepareCell(forTableView: self.tableView, indexPath: indexPath)
         
-        if rowDescriptor.type == .RecordTypeSelection {
+        if rowDescriptor is TypeRowDescriptor {
             self.menuAnchor = cell.textLabel
         }
-        
-        cell.setup(delegate: self, dataSource: rowDescriptor)
-        
+                
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        guard let rowDescriptor = self.activeRecordDescriptor[indexPath] else { return }
-        
-        if rowDescriptor.type == .RecordTypeSelection {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.performSegueWithIdentifier(Constants.ShowMenuSecretTypeSegueId, sender: nil)
-            })
-        }
-        else {
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddSecretFieldBaseCell
-            cell.didSelectCell()
-        }
+        self.selectRow(indexPath: indexPath)
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -143,193 +174,6 @@ class AddSecretVC: UITableViewController, UIPopoverPresentationControllerDelegat
     func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
         return true
     }
-    
-    // MARK: - AddSecretFieldCellDelegate
-    
-    func onKeyboardReturnPressed(cell: AddSecretFieldBaseCell) {
-        guard let rowIndexPath = self.tableView.indexPathForCell(cell) else { return }
-        self.tableView.deselectRowAtIndexPath(rowIndexPath, animated: true)
-        
-        let nextRowIndexPath = NSIndexPath(forRow: rowIndexPath.row + 1, inSection: 0)
-        guard let nextRowDescriptor = self.activeRecordDescriptor[nextRowIndexPath] else { return }
-        if nextRowDescriptor.type == .Field {
-            guard let nextCell = self.tableView.cellForRowAtIndexPath(nextRowIndexPath) else { return }
-            (nextCell as? AddSecretFieldValueCell)?.valueTextField.becomeFirstResponder()
-        } else {
-            (cell as? AddSecretFieldValueCell)?.valueTextField.resignFirstResponder()
-        }
-    }
-    
-    
-    // MARK: - RecordDescriptor
-    
-    class RecordDescriptor {
-        unowned let viewController: AddSecretVC
-        var secret: Secret
-        var rowDescriptors: [RowDescriptor]
-        
-        init(viewController: AddSecretVC, secret: Secret) {
-            self.viewController = viewController
-            self.secret = secret
-            self.rowDescriptors = [RowDescriptor]()
-            self.rowDescriptors += [RowDescriptor(type: .RecordTypeSelection, recordDescriptor: self)]
-            self.rowDescriptors += secret.fields.map { RowDescriptor(recordDescriptor: self, field: $0) }
-            self.rowDescriptors += [RowDescriptor(type: .AddField, recordDescriptor: self)]
-        }
-        
-        subscript(indexPath: NSIndexPath) -> RowDescriptor? {
-            get {
-                guard indexPath.section == 0 && indexPath.row < self.rowDescriptors.count else { return nil }
-                return rowDescriptors[indexPath.row]
-            }
-        }
-        
-        subscript(rowDescriptor: RowDescriptor) -> NSIndexPath? {
-            get {
-                guard let index = self.rowDescriptors.indexOf( { $0 === rowDescriptor }) else { return nil }
-                return NSIndexPath(forRow: index, inSection: 0)
-            }
-        }
-        
-        func getNextRowDescriptor(startingFrom rowDescriptor: RowDescriptor) -> RowDescriptor? {
-            guard let index = self.rowDescriptors.indexOf( { $0 === rowDescriptor }) else { return nil }
-            if index < self.rowDescriptors.count {
-                return self.rowDescriptors[index + 1]
-            }
-            return nil
-        }
-    }
-    
-    // MARK: - RowDescriptor
-    
-    class RowDescriptor: AddSecretFieldCellDataSource {
-        
-        enum Type7 {
-            case Field
-            case RecordTypeSelection
-            case AddField
-        }
-        
-        private struct Constants {
-            static let TypeFieldCellIdentifier = "addSecretTypeFieldCell"
-            static let SystemFieldCellIdentifier = "addSecretSystemFieldCell"
-            static let UrlFieldCellIdentifier = "addSecretUrlFieldCell"
-            static let AccountFieldCellIdentifier = "addSecretAccountFieldCell"
-            static let PasswordFieldCellIdentifier = "addSecretPasswordFieldCell"
-            static let InfoParagraphFieldCellIdentifier = "addSecretInfoParagraphFieldCell"
-            static let GenericFieldCellIdentifier = "addSecretGenericFieldCell"
-            static let AddFieldCellIdentifier = "addSecretAddFieldCell"
-            
-            static let StandardRowHeight = CGFloat(44)
-            static let DoubleRowHeight = CGFloat(88)
-        }
-        
-        let type: Type7
-        unowned let recordDescriptor: RecordDescriptor
-        let field: SecretField?
-        
-        init(type: Type7, recordDescriptor: RecordDescriptor, field: SecretField? = nil) {
-            self.type = type
-            self.recordDescriptor = recordDescriptor
-            self.field = field
-        }
 
-        convenience init(recordDescriptor: RecordDescriptor, field: SecretField) {
-            self.init(type: .Field, recordDescriptor: recordDescriptor, field: field)
-        }
-        
-        var cellIdentifier: String {
-            switch self.type {
-            case .RecordTypeSelection:
-                return Constants.TypeFieldCellIdentifier
-            case .AddField:
-                return Constants.AddFieldCellIdentifier
-            case .Field:
-                switch self.field!.type {
-                case .System:           return Constants.SystemFieldCellIdentifier
-                case .Url:              return Constants.UrlFieldCellIdentifier
-                case .Email:            return Constants.AccountFieldCellIdentifier
-                case .Username:         return Constants.AccountFieldCellIdentifier
-                case .Password:         return Constants.PasswordFieldCellIdentifier
-                case .NoteParagraph:    return Constants.InfoParagraphFieldCellIdentifier
-                case .NoteTitle:        return Constants.GenericFieldCellIdentifier
-                case .CCNumber:         return Constants.GenericFieldCellIdentifier
-                case .PhoneNumber:      return Constants.GenericFieldCellIdentifier
-                }
-            }
-        }
-        
-        var rowHeight: CGFloat {
-            if self.type == .Field && self.field!.type == SecretField.Type2.NoteParagraph {
-                return Constants.DoubleRowHeight
-            } else {
-                return Constants.StandardRowHeight
-            }
-        }
-        
-        var canEdit: Bool {
-            switch self.type {
-            case .RecordTypeSelection:
-                return false
-            case .AddField:
-                return false
-            case .Field:
-                switch self.field!.type {
-                case .System:           return false
-                case .Url:              return true
-                case .Email:            return true
-                case .Username:         return true
-                case .Password:         return true
-                case .NoteParagraph:    return true
-                case .NoteTitle:        return true
-                case .CCNumber:         return true
-                case .PhoneNumber:      return true
-                }
-            }
-        }
-        
-        var editingStyle: UITableViewCellEditingStyle {
-            return self.canEdit ? .Delete : .None
-        }
-        
-        var canMove: Bool {
-            return self.canEdit
-        }
-        
-        // MARK: - AddSecretFieldCellDataSource
-        
-        func getDisplayLabel() -> String {
-            switch self.type {
-            case .RecordTypeSelection:
-                return self.recordDescriptor.secret.type.rawValue
-            case .AddField:
-                return "n/a"
-            case .Field:
-                return self.field!.label ?? self.field!.type.rawValue
-            }
-        }
-        
-        func getDisplayValue() -> String? {
-            switch self.type {
-            case .RecordTypeSelection:
-                return nil
-            case .AddField:
-                return nil
-            case .Field:
-                return self.field!.value ?? nil
-            }
-        }
-        
-        func receiveValue(value: String?) {
-            switch self.type {
-            case .RecordTypeSelection:
-                break
-            case .AddField:
-                break
-            case .Field:
-                print("received value: \(value)")
-                return self.field!.value = value
-            }
-        }
-    }
+
 }
