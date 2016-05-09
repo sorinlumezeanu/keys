@@ -12,6 +12,7 @@ class SecretField: NSObject, NSCoding {
     
     enum Type2: String {
         case System = "Target System"
+        case LoginWithSocialAccount = "Login with social account"
         case Url = "Url"
         case Email = "Email"
         case Username = "Username"
@@ -20,6 +21,10 @@ class SecretField: NSObject, NSCoding {
         case PhoneNumber = "Phone No."
         case NoteTitle = "Note Title"
         case NoteParagraph = "Note Paragraph"
+        
+        static var fieldTypeMenuOptions: [Type2] {
+            return [Url, Email, Username, Password, CCNumber, PhoneNumber, NoteTitle, NoteParagraph]
+        }
     }
     
     var type: Type2
@@ -28,7 +33,7 @@ class SecretField: NSObject, NSCoding {
     var image: Image?
     var isMandatory: Bool
     
-    init(withType type: Type2, mandatory: Bool)
+    init(type: Type2, mandatory: Bool)
     {
         self.type = type
         self.label = type.rawValue
@@ -40,7 +45,7 @@ class SecretField: NSObject, NSCoding {
         guard let type = Type2(rawValue: typeRawValue) else { return nil }
         guard let isMandatory = decoder.decodeObjectForKey("isMandatory") as? Bool else { return nil }
         
-        self.init(withType: type, mandatory: isMandatory)
+        self.init(type: type, mandatory: isMandatory)
         
         if let label = decoder.decodeObjectForKey("label") as? String {
             self.label = label

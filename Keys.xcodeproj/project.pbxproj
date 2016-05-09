@@ -7,20 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF0317281CC9FA720028E1AE /* AddRecordValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0317271CC9FA720028E1AE /* AddRecordValueCell.swift */; };
+		FF03172A1CC9FBC90028E1AE /* AddRecordNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0317291CC9FBC90028E1AE /* AddRecordNoteCell.swift */; };
+		FF03172D1CCA04FC0028E1AE /* RecordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03172C1CCA04FC0028E1AE /* RecordVM.swift */; };
+		FF03172F1CCA17F40028E1AE /* RecordRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03172E1CCA17F40028E1AE /* RecordRowVM.swift */; };
+		FF0317311CCA18920028E1AE /* TypeRecordRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0317301CCA18920028E1AE /* TypeRecordRowVM.swift */; };
+		FF0317351CCA1D3A0028E1AE /* LoginRecordRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0317341CCA1D3A0028E1AE /* LoginRecordRowVM.swift */; };
+		FF0317371CCA1D6C0028E1AE /* SystemRecordRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0317361CCA1D6C0028E1AE /* SystemRecordRowVM.swift */; };
+		FF0317391CCA1DA10028E1AE /* ValueRecordRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0317381CCA1DA10028E1AE /* ValueRecordRowVM.swift */; };
+		FF03173B1CCA1E1C0028E1AE /* NoteRecordRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03173A1CCA1E1C0028E1AE /* NoteRecordRowVM.swift */; };
+		FF03173D1CCA1E610028E1AE /* AddFieldRecordRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF03173C1CCA1E610028E1AE /* AddFieldRecordRowVM.swift */; };
 		FF086F4E1C9000BC002C78F0 /* SecurityContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF086F4D1C9000BC002C78F0 /* SecurityContext.swift */; };
 		FF086F511C907760002C78F0 /* ZeroVaultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF086F501C907760002C78F0 /* ZeroVaultsVC.swift */; };
 		FF3F56731CBE89D200450DF4 /* SecretVCFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3F56721CBE89D200450DF4 /* SecretVCFieldCell.swift */; };
 		FF3F56751CBE89E000450DF4 /* SecretVCNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3F56741CBE89E000450DF4 /* SecretVCNoteCell.swift */; };
+		FF4973961CCA6D3B00AD4CE0 /* SelectRecordTypeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4973951CCA6D3B00AD4CE0 /* SelectRecordTypeVC.swift */; };
+		FF4973981CCA804200AD4CE0 /* SelectSystemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4973971CCA804200AD4CE0 /* SelectSystemVC.swift */; };
+		FF49739A1CCB5FCE00AD4CE0 /* SelectSystemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4973991CCB5FCE00AD4CE0 /* SelectSystemCell.swift */; };
+		FF49739C1CCB915500AD4CE0 /* SystemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49739B1CCB915500AD4CE0 /* SystemVM.swift */; };
 		FF4B549E1C945EBA00522159 /* AddVaultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4B549D1C945EBA00522159 /* AddVaultTVC.swift */; };
+		FF5268F91CCEB08A00B99E42 /* websites.csv in Resources */ = {isa = PBXBuildFile; fileRef = FF5268F81CCEB08A00B99E42 /* websites.csv */; };
 		FF5C526C1C99AC2600916E1B /* VaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5C526B1C99AC2600916E1B /* VaultVC.swift */; };
 		FF63D9C41C8ED5B400C3548C /* NSData+ErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = FF63D9C31C8ED5B400C3548C /* NSData+ErrorHandling.m */; };
 		FF63D9C71C8EF45C00C3548C /* NSException+Convertor.m in Sources */ = {isa = PBXBuildFile; fileRef = FF63D9C61C8EF45C00C3548C /* NSException+Convertor.m */; };
 		FF63D9CA1C8F2E0700C3548C /* NSData+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF63D9C91C8F2E0700C3548C /* NSData+Extension.swift */; };
-		FF6692AE1CA0805A0092241D /* AddSecretValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6692AD1CA0805A0092241D /* AddSecretValueCell.swift */; };
 		FF89C05E1C8C16A800779E5D /* VaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89C05D1C8C16A800779E5D /* VaultCell.swift */; };
 		FF89C0631C8C2D9A00779E5D /* AESCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FF89C0621C8C2D9A00779E5D /* AESCryptor.m */; };
+		FF8CBE571CDD19FF00AAB1A3 /* Website.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CBE561CDD19FF00AAB1A3 /* Website.swift */; };
 		FFA6C46C1C9698A20018F5CE /* GetPassphraseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA6C46B1C9698A20018F5CE /* GetPassphraseVC.swift */; };
-		FFAB92CD1CC01F0C004421DA /* spanac.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAB92CC1CC01F0C004421DA /* spanac.swift */; };
 		FFB346861CBD3EFE00A7BFFB /* SecretVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB346851CBD3EFE00A7BFFB /* SecretVC.swift */; };
 		FFB664721C877A8800D0157B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664711C877A8800D0157B /* AppDelegate.swift */; };
 		FFB664761C877A8800D0157B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664751C877A8800D0157B /* SecondViewController.swift */; };
@@ -35,17 +49,12 @@
 		FFB664A91C8784DF00D0157B /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB664A81C8784DF00D0157B /* Repository.swift */; };
 		FFBA520B1CAAFEFA001D4B33 /* SecretCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBA520A1CAAFEF9001D4B33 /* SecretCell.swift */; };
 		FFD8440D1C9D714500D46E7F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD8440C1C9D714500D46E7F /* Image.swift */; };
-		FFD8440F1C9D7FEA00D46E7F /* AddSecretVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD8440E1C9D7FEA00D46E7F /* AddSecretVC.swift */; };
 		FFD980B11C88610D004DF3D2 /* VaultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD980B01C88610D004DF3D2 /* VaultsVC.swift */; };
 		FFDB261D1CBD7B4400858CB3 /* SecretVCTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDB261C1CBD7B4400858CB3 /* SecretVCTitleCell.swift */; };
-		FFE568AF1CA5D99E009FC98A /* AddSecretNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE568AE1CA5D99E009FC98A /* AddSecretNoteCell.swift */; };
-		FFE73D8C1CA2B62C0061B2BD /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE73D8B1CA2B62C0061B2BD /* MenuVC.swift */; };
+		FFED4FEE1CC799AD00B67D77 /* AddRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFED4FED1CC799AD00B67D77 /* AddRecordVC.swift */; };
+		FFED4FF11CC7A27F00B67D77 /* AddRecordSystemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFED4FF01CC7A27F00B67D77 /* AddRecordSystemCell.swift */; };
+		FFED4FF31CC7C03100B67D77 /* AddRecordLoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFED4FF21CC7C03100B67D77 /* AddRecordLoginCell.swift */; };
 		FFF5E49D1C89C68500CD7DF5 /* VaultFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5E49C1C89C68500CD7DF5 /* VaultFile.swift */; };
-		FFFECE641CADAB2900E7C484 /* RecordDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFECE631CADAB2900E7C484 /* RecordDescriptor.swift */; };
-		FFFECE661CADAB3B00E7C484 /* RowDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFECE651CADAB3B00E7C484 /* RowDescriptor.swift */; };
-		FFFECE681CADAC2400E7C484 /* TypeRowDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFECE671CADAC2400E7C484 /* TypeRowDescriptor.swift */; };
-		FFFECE6A1CADB0B300E7C484 /* SecretFieldRowDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFECE691CADB0B300E7C484 /* SecretFieldRowDescriptor.swift */; };
-		FFFECE6E1CADB1A800E7C484 /* AddFieldRowDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFECE6D1CADB1A800E7C484 /* AddFieldRowDescriptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,24 +75,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF0317271CC9FA720028E1AE /* AddRecordValueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRecordValueCell.swift; path = "Add Record/AddRecordValueCell.swift"; sourceTree = "<group>"; };
+		FF0317291CC9FBC90028E1AE /* AddRecordNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRecordNoteCell.swift; path = "Add Record/AddRecordNoteCell.swift"; sourceTree = "<group>"; };
+		FF03172C1CCA04FC0028E1AE /* RecordVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordVM.swift; path = "Add Record/RecordVM.swift"; sourceTree = "<group>"; };
+		FF03172E1CCA17F40028E1AE /* RecordRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordRowVM.swift; path = "Add Record/RecordRowVM.swift"; sourceTree = "<group>"; };
+		FF0317301CCA18920028E1AE /* TypeRecordRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeRecordRowVM.swift; path = "Add Record/TypeRecordRowVM.swift"; sourceTree = "<group>"; };
+		FF0317341CCA1D3A0028E1AE /* LoginRecordRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginRecordRowVM.swift; path = "Add Record/LoginRecordRowVM.swift"; sourceTree = "<group>"; };
+		FF0317361CCA1D6C0028E1AE /* SystemRecordRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SystemRecordRowVM.swift; path = "Add Record/SystemRecordRowVM.swift"; sourceTree = "<group>"; };
+		FF0317381CCA1DA10028E1AE /* ValueRecordRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValueRecordRowVM.swift; path = "Add Record/ValueRecordRowVM.swift"; sourceTree = "<group>"; };
+		FF03173A1CCA1E1C0028E1AE /* NoteRecordRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteRecordRowVM.swift; path = "Add Record/NoteRecordRowVM.swift"; sourceTree = "<group>"; };
+		FF03173C1CCA1E610028E1AE /* AddFieldRecordRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddFieldRecordRowVM.swift; path = "Add Record/AddFieldRecordRowVM.swift"; sourceTree = "<group>"; };
 		FF086F4D1C9000BC002C78F0 /* SecurityContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityContext.swift; sourceTree = "<group>"; };
 		FF086F501C907760002C78F0 /* ZeroVaultsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZeroVaultsVC.swift; sourceTree = "<group>"; };
 		FF3F56721CBE89D200450DF4 /* SecretVCFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretVCFieldCell.swift; sourceTree = "<group>"; };
 		FF3F56741CBE89E000450DF4 /* SecretVCNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretVCNoteCell.swift; sourceTree = "<group>"; };
+		FF4973951CCA6D3B00AD4CE0 /* SelectRecordTypeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectRecordTypeVC.swift; path = "Add Record/SelectRecordTypeVC.swift"; sourceTree = "<group>"; };
+		FF4973971CCA804200AD4CE0 /* SelectSystemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectSystemVC.swift; path = "Add Record/SelectSystemVC.swift"; sourceTree = "<group>"; };
+		FF4973991CCB5FCE00AD4CE0 /* SelectSystemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectSystemCell.swift; path = "Add Record/SelectSystemCell.swift"; sourceTree = "<group>"; };
+		FF49739B1CCB915500AD4CE0 /* SystemVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SystemVM.swift; path = "Add Record/SystemVM.swift"; sourceTree = "<group>"; };
 		FF4B549D1C945EBA00522159 /* AddVaultTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVaultTVC.swift; sourceTree = "<group>"; };
+		FF5268F81CCEB08A00B99E42 /* websites.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = websites.csv; sourceTree = "<group>"; };
 		FF5C526B1C99AC2600916E1B /* VaultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultVC.swift; sourceTree = "<group>"; };
 		FF63D9C21C8ED5B400C3548C /* NSData+ErrorHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ErrorHandling.h"; sourceTree = "<group>"; };
 		FF63D9C31C8ED5B400C3548C /* NSData+ErrorHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ErrorHandling.m"; sourceTree = "<group>"; };
 		FF63D9C51C8EF45C00C3548C /* NSException+Convertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSException+Convertor.h"; sourceTree = "<group>"; };
 		FF63D9C61C8EF45C00C3548C /* NSException+Convertor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSException+Convertor.m"; sourceTree = "<group>"; };
 		FF63D9C91C8F2E0700C3548C /* NSData+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Extension.swift"; sourceTree = "<group>"; };
-		FF6692AD1CA0805A0092241D /* AddSecretValueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSecretValueCell.swift; sourceTree = "<group>"; };
 		FF89C05D1C8C16A800779E5D /* VaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultCell.swift; sourceTree = "<group>"; };
 		FF89C0611C8C2D9A00779E5D /* Keys-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Keys-Bridging-Header.h"; sourceTree = "<group>"; };
 		FF89C0621C8C2D9A00779E5D /* AESCryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCryptor.m; sourceTree = "<group>"; };
 		FF89C0641C8C2FE200779E5D /* AESCryptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AESCryptor.h; sourceTree = "<group>"; };
+		FF8CBE561CDD19FF00AAB1A3 /* Website.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Website.swift; sourceTree = "<group>"; };
 		FFA6C46B1C9698A20018F5CE /* GetPassphraseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPassphraseVC.swift; sourceTree = "<group>"; };
-		FFAB92CC1CC01F0C004421DA /* spanac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spanac.swift; sourceTree = "<group>"; };
 		FFB346851CBD3EFE00A7BFFB /* SecretVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretVC.swift; sourceTree = "<group>"; };
 		FFB6646E1C877A8800D0157B /* Keys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFB664711C877A8800D0157B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,18 +127,13 @@
 		FFB664A81C8784DF00D0157B /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		FFBA520A1CAAFEF9001D4B33 /* SecretCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretCell.swift; sourceTree = "<group>"; };
 		FFD8440C1C9D714500D46E7F /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		FFD8440E1C9D7FEA00D46E7F /* AddSecretVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSecretVC.swift; sourceTree = "<group>"; };
 		FFD980B01C88610D004DF3D2 /* VaultsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultsVC.swift; sourceTree = "<group>"; };
 		FFD980B21C8868D3004DF3D2 /* Readme */ = {isa = PBXFileReference; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
 		FFDB261C1CBD7B4400858CB3 /* SecretVCTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretVCTitleCell.swift; sourceTree = "<group>"; };
-		FFE568AE1CA5D99E009FC98A /* AddSecretNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSecretNoteCell.swift; sourceTree = "<group>"; };
-		FFE73D8B1CA2B62C0061B2BD /* MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		FFED4FED1CC799AD00B67D77 /* AddRecordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRecordVC.swift; path = "Add Record/AddRecordVC.swift"; sourceTree = "<group>"; };
+		FFED4FF01CC7A27F00B67D77 /* AddRecordSystemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRecordSystemCell.swift; path = "Add Record/AddRecordSystemCell.swift"; sourceTree = "<group>"; };
+		FFED4FF21CC7C03100B67D77 /* AddRecordLoginCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRecordLoginCell.swift; path = "Add Record/AddRecordLoginCell.swift"; sourceTree = "<group>"; };
 		FFF5E49C1C89C68500CD7DF5 /* VaultFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaultFile.swift; sourceTree = "<group>"; };
-		FFFECE631CADAB2900E7C484 /* RecordDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordDescriptor.swift; sourceTree = "<group>"; };
-		FFFECE651CADAB3B00E7C484 /* RowDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowDescriptor.swift; sourceTree = "<group>"; };
-		FFFECE671CADAC2400E7C484 /* TypeRowDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeRowDescriptor.swift; sourceTree = "<group>"; };
-		FFFECE691CADB0B300E7C484 /* SecretFieldRowDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretFieldRowDescriptor.swift; sourceTree = "<group>"; };
-		FFFECE6D1CADB1A800E7C484 /* AddFieldRowDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFieldRowDescriptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +161,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF03172B1CCA04DA0028E1AE /* Add Record VMs */ = {
+			isa = PBXGroup;
+			children = (
+				FF03172C1CCA04FC0028E1AE /* RecordVM.swift */,
+				FF03172E1CCA17F40028E1AE /* RecordRowVM.swift */,
+				FF0317301CCA18920028E1AE /* TypeRecordRowVM.swift */,
+				FF0317361CCA1D6C0028E1AE /* SystemRecordRowVM.swift */,
+				FF0317341CCA1D3A0028E1AE /* LoginRecordRowVM.swift */,
+				FF0317381CCA1DA10028E1AE /* ValueRecordRowVM.swift */,
+				FF03173A1CCA1E1C0028E1AE /* NoteRecordRowVM.swift */,
+				FF03173C1CCA1E610028E1AE /* AddFieldRecordRowVM.swift */,
+			);
+			name = "Add Record VMs";
+			sourceTree = "<group>";
+		};
 		FF086F4C1C90007E002C78F0 /* Security */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +189,7 @@
 		FF086F4F1C9076F9002C78F0 /* Auxiliary */ = {
 			isa = PBXGroup;
 			children = (
+				FF5268F81CCEB08A00B99E42 /* websites.csv */,
 				FFB6647A1C877A8800D0157B /* Assets.xcassets */,
 				FFB6647C1C877A8800D0157B /* LaunchScreen.storyboard */,
 				FF89C0611C8C2D9A00779E5D /* Keys-Bridging-Header.h */,
@@ -165,7 +199,7 @@
 			name = Auxiliary;
 			sourceTree = "<group>";
 		};
-		FF3F56711CBE899B00450DF4 /* SecretVC */ = {
+		FF3F56711CBE899B00450DF4 /* View Secret */ = {
 			isa = PBXGroup;
 			children = (
 				FFB346851CBD3EFE00A7BFFB /* SecretVC.swift */,
@@ -173,7 +207,7 @@
 				FF3F56721CBE89D200450DF4 /* SecretVCFieldCell.swift */,
 				FF3F56741CBE89E000450DF4 /* SecretVCNoteCell.swift */,
 			);
-			name = SecretVC;
+			name = "View Secret";
 			sourceTree = "<group>";
 		};
 		FF63D9BA1C8ED37E00C3548C /* Objective-C Wrappers */ = {
@@ -195,13 +229,23 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
-		FF6692AC1CA080260092241D /* Add Secret Cells */ = {
+		FF98C7A91CC155180066E062 /* View Vault */ = {
 			isa = PBXGroup;
 			children = (
-				FF6692AD1CA0805A0092241D /* AddSecretValueCell.swift */,
-				FFE568AE1CA5D99E009FC98A /* AddSecretNoteCell.swift */,
+				FF5C526B1C99AC2600916E1B /* VaultVC.swift */,
+				FFBA520A1CAAFEF9001D4B33 /* SecretCell.swift */,
 			);
-			name = "Add Secret Cells";
+			name = "View Vault";
+			sourceTree = "<group>";
+		};
+		FFAFC8C91CCE5D9300C48362 /* Select System */ = {
+			isa = PBXGroup;
+			children = (
+				FF4973971CCA804200AD4CE0 /* SelectSystemVC.swift */,
+				FF4973991CCB5FCE00AD4CE0 /* SelectSystemCell.swift */,
+				FF49739B1CCB915500AD4CE0 /* SystemVM.swift */,
+			);
+			name = "Select System";
 			sourceTree = "<group>";
 		};
 		FFB664651C877A8800D0157B = {
@@ -266,7 +310,7 @@
 				FFB664A41C87800B00D0157B /* Secret.swift */,
 				FFB664A61C8780DB00D0157B /* SecretField.swift */,
 				FFD8440C1C9D714500D46E7F /* Image.swift */,
-				FFAB92CC1CC01F0C004421DA /* spanac.swift */,
+				FF8CBE561CDD19FF00AAB1A3 /* Website.swift */,
 			);
 			name = Vaults;
 			sourceTree = "<group>";
@@ -274,33 +318,40 @@
 		FFD980AF1C8860D8004DF3D2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FF3F56711CBE899B00450DF4 /* SecretVC */,
-				FFFECE621CADAAFD00E7C484 /* Add Secret Row Descriptors */,
-				FF6692AC1CA080260092241D /* Add Secret Cells */,
+				FFED4FEB1CC7996300B67D77 /* Add Record */,
+				FF3F56711CBE899B00450DF4 /* View Secret */,
+				FF98C7A91CC155180066E062 /* View Vault */,
 				FFD980B01C88610D004DF3D2 /* VaultsVC.swift */,
 				FF89C05D1C8C16A800779E5D /* VaultCell.swift */,
 				FFA6C46B1C9698A20018F5CE /* GetPassphraseVC.swift */,
 				FF086F501C907760002C78F0 /* ZeroVaultsVC.swift */,
 				FF4B549D1C945EBA00522159 /* AddVaultTVC.swift */,
-				FF5C526B1C99AC2600916E1B /* VaultVC.swift */,
-				FFBA520A1CAAFEF9001D4B33 /* SecretCell.swift */,
-				FFD8440E1C9D7FEA00D46E7F /* AddSecretVC.swift */,
 				FFB664751C877A8800D0157B /* SecondViewController.swift */,
-				FFE73D8B1CA2B62C0061B2BD /* MenuVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		FFFECE621CADAAFD00E7C484 /* Add Secret Row Descriptors */ = {
+		FFED4FEB1CC7996300B67D77 /* Add Record */ = {
 			isa = PBXGroup;
 			children = (
-				FFFECE631CADAB2900E7C484 /* RecordDescriptor.swift */,
-				FFFECE651CADAB3B00E7C484 /* RowDescriptor.swift */,
-				FFFECE671CADAC2400E7C484 /* TypeRowDescriptor.swift */,
-				FFFECE691CADB0B300E7C484 /* SecretFieldRowDescriptor.swift */,
-				FFFECE6D1CADB1A800E7C484 /* AddFieldRowDescriptor.swift */,
+				FF03172B1CCA04DA0028E1AE /* Add Record VMs */,
+				FFED4FEF1CC7A25900B67D77 /* Add Record Cells */,
+				FFAFC8C91CCE5D9300C48362 /* Select System */,
+				FFED4FED1CC799AD00B67D77 /* AddRecordVC.swift */,
+				FF4973951CCA6D3B00AD4CE0 /* SelectRecordTypeVC.swift */,
 			);
-			name = "Add Secret Row Descriptors";
+			name = "Add Record";
+			sourceTree = "<group>";
+		};
+		FFED4FEF1CC7A25900B67D77 /* Add Record Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FFED4FF01CC7A27F00B67D77 /* AddRecordSystemCell.swift */,
+				FFED4FF21CC7C03100B67D77 /* AddRecordLoginCell.swift */,
+				FF0317271CC9FA720028E1AE /* AddRecordValueCell.swift */,
+				FF0317291CC9FBC90028E1AE /* AddRecordNoteCell.swift */,
+			);
+			name = "Add Record Cells";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -407,6 +458,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF5268F91CCEB08A00B99E42 /* websites.csv in Resources */,
 				FFB6647E1C877A8800D0157B /* LaunchScreen.storyboard in Resources */,
 				FFB6647B1C877A8800D0157B /* Assets.xcassets in Resources */,
 				FFB664791C877A8800D0157B /* Main.storyboard in Resources */,
@@ -434,40 +486,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF03172A1CC9FBC90028E1AE /* AddRecordNoteCell.swift in Sources */,
+				FF0317281CC9FA720028E1AE /* AddRecordValueCell.swift in Sources */,
 				FFB664761C877A8800D0157B /* SecondViewController.swift in Sources */,
 				FF086F511C907760002C78F0 /* ZeroVaultsVC.swift in Sources */,
 				FF086F4E1C9000BC002C78F0 /* SecurityContext.swift in Sources */,
-				FF6692AE1CA0805A0092241D /* AddSecretValueCell.swift in Sources */,
-				FFFECE6E1CADB1A800E7C484 /* AddFieldRowDescriptor.swift in Sources */,
+				FF4973981CCA804200AD4CE0 /* SelectSystemVC.swift in Sources */,
 				FFA6C46C1C9698A20018F5CE /* GetPassphraseVC.swift in Sources */,
 				FFB664A51C87800B00D0157B /* Secret.swift in Sources */,
+				FF03172F1CCA17F40028E1AE /* RecordRowVM.swift in Sources */,
 				FF63D9CA1C8F2E0700C3548C /* NSData+Extension.swift in Sources */,
 				FFD8440D1C9D714500D46E7F /* Image.swift in Sources */,
 				FF3F56731CBE89D200450DF4 /* SecretVCFieldCell.swift in Sources */,
+				FF0317351CCA1D3A0028E1AE /* LoginRecordRowVM.swift in Sources */,
 				FF5C526C1C99AC2600916E1B /* VaultVC.swift in Sources */,
+				FF03173B1CCA1E1C0028E1AE /* NoteRecordRowVM.swift in Sources */,
 				FFBA520B1CAAFEFA001D4B33 /* SecretCell.swift in Sources */,
+				FFED4FF11CC7A27F00B67D77 /* AddRecordSystemCell.swift in Sources */,
 				FF4B549E1C945EBA00522159 /* AddVaultTVC.swift in Sources */,
 				FF63D9C41C8ED5B400C3548C /* NSData+ErrorHandling.m in Sources */,
-				FFE568AF1CA5D99E009FC98A /* AddSecretNoteCell.swift in Sources */,
+				FF4973961CCA6D3B00AD4CE0 /* SelectRecordTypeVC.swift in Sources */,
 				FF89C05E1C8C16A800779E5D /* VaultCell.swift in Sources */,
-				FFFECE661CADAB3B00E7C484 /* RowDescriptor.swift in Sources */,
-				FFFECE6A1CADB0B300E7C484 /* SecretFieldRowDescriptor.swift in Sources */,
+				FF03172D1CCA04FC0028E1AE /* RecordVM.swift in Sources */,
+				FF0317391CCA1DA10028E1AE /* ValueRecordRowVM.swift in Sources */,
+				FFED4FEE1CC799AD00B67D77 /* AddRecordVC.swift in Sources */,
 				FFB664A91C8784DF00D0157B /* Repository.swift in Sources */,
-				FFD8440F1C9D7FEA00D46E7F /* AddSecretVC.swift in Sources */,
-				FFFECE681CADAC2400E7C484 /* TypeRowDescriptor.swift in Sources */,
+				FF8CBE571CDD19FF00AAB1A3 /* Website.swift in Sources */,
+				FF49739C1CCB915500AD4CE0 /* SystemVM.swift in Sources */,
 				FFB664A71C8780DB00D0157B /* SecretField.swift in Sources */,
 				FF3F56751CBE89E000450DF4 /* SecretVCNoteCell.swift in Sources */,
 				FFB664721C877A8800D0157B /* AppDelegate.swift in Sources */,
+				FF0317371CCA1D6C0028E1AE /* SystemRecordRowVM.swift in Sources */,
+				FF0317311CCA18920028E1AE /* TypeRecordRowVM.swift in Sources */,
 				FFDB261D1CBD7B4400858CB3 /* SecretVCTitleCell.swift in Sources */,
 				FFB664A31C877DCB00D0157B /* Vault.swift in Sources */,
-				FFE73D8C1CA2B62C0061B2BD /* MenuVC.swift in Sources */,
-				FFAB92CD1CC01F0C004421DA /* spanac.swift in Sources */,
+				FFED4FF31CC7C03100B67D77 /* AddRecordLoginCell.swift in Sources */,
+				FF49739A1CCB5FCE00AD4CE0 /* SelectSystemCell.swift in Sources */,
+				FF03173D1CCA1E610028E1AE /* AddFieldRecordRowVM.swift in Sources */,
 				FFB346861CBD3EFE00A7BFFB /* SecretVC.swift in Sources */,
 				FFF5E49D1C89C68500CD7DF5 /* VaultFile.swift in Sources */,
 				FFD980B11C88610D004DF3D2 /* VaultsVC.swift in Sources */,
 				FF89C0631C8C2D9A00779E5D /* AESCryptor.m in Sources */,
 				FF63D9C71C8EF45C00C3548C /* NSException+Convertor.m in Sources */,
-				FFFECE641CADAB2900E7C484 /* RecordDescriptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

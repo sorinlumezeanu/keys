@@ -28,7 +28,7 @@ class Image: NSObject, NSCoding {
             }
     }()
     
-    init(withType type: Type3, url: String) {
+    init(type: Type3, url: String) {
         self.type = type
         self.url = url
     }
@@ -38,7 +38,7 @@ class Image: NSObject, NSCoding {
         guard let type = Type3(rawValue: typeRawValue) else { return nil }
         guard let url = decoder.decodeObjectForKey("url") as? String else { return nil }
         
-        self.init(withType: type, url: url)
+        self.init(type: type, url: url)
     }
     
     func encodeWithCoder(coder: NSCoder) {

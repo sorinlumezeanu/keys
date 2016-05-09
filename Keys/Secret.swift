@@ -22,14 +22,12 @@ class Secret : NSObject, NSCoding {
     
     var uuid: String
     var type: Type5
-    var name: String
     var fields: [SecretField]
     
-    init(withType type: Type5, name: String, uuid: String? = nil)
+    init(type: Type5, uuid: String? = nil)
     {
         self.uuid = uuid ?? NSUUID().UUIDString
         self.type = type
-        self.name = name
         self.fields = [SecretField]()
     }
     
@@ -37,9 +35,8 @@ class Secret : NSObject, NSCoding {
         guard let uuid = decoder.decodeObjectForKey("uuid") as? String else { return nil }
         guard let typeRawValue = decoder.decodeObjectForKey("type") as? String else { return nil }
         guard let type = Type5(rawValue: typeRawValue) else { return nil }
-        guard let name = decoder.decodeObjectForKey("name") as? String else { return nil }
         
-        self.init(withType: type, name: name, uuid: uuid)
+        self.init(type: type, uuid: uuid)
         
         if let fields = decoder.decodeObjectForKey("fields") as? [SecretField] {
             self.fields += fields
@@ -49,8 +46,13 @@ class Secret : NSObject, NSCoding {
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(uuid, forKey: "uuid")
         coder.encodeObject(type.rawValue, forKey: "type")
-        coder.encodeObject(name, forKey: "name")
         coder.encodeObject(fields, forKey: "fields")
+    }
+    
+    subscript(fieldType: SecretField.Type2) -> [SecretField]? {
+        get {
+            return self.fields.filter { $0.type == fieldType }
+        }
     }
     
     override var description: String {
@@ -67,25 +69,24 @@ class Secret : NSObject, NSCoding {
         }
     }
     
-    class func createWithType(type: Type5, name: String) -> Secret {
-        let secret = Secret(withType: type, name: name)
+    class func createWithType(type: Type5) -> Secret {
+        let secret = Secret(type: type)
 
         switch (type) {
         case .Login:
-            secret.fields.append(SecretField(withType: .System, mandatory: true))
-            secret.fields.append(SecretField(withType: .Url, mandatory: false))
-            secret.fields.append(SecretField(withType: .Username, mandatory: true))
-            secret.fields.append(SecretField(withType: .Password, mandatory: true))
+            secret.fields.append(SecretField(type: .System, mandatory: true))
+            secret.fields.append(SecretField(type: .LoginWithSocialAccount, mandatory: true))
+            secret.fields.append(SecretField(type: .Username, mandatory: true))
+            secret.fields.append(SecretField(type: .Password, mandatory: true))
             return secret
             
         case .Note:
-            secret.fields.append(SecretField(withType: .NoteTitle, mandatory: true))
-            secret.fields.append(SecretField(withType: .NoteParagraph, mandatory: false))
+            secret.fields.append(SecretField(type: .NoteTitle, mandatory: true))
+            secret.fields.append(SecretField(type: .NoteParagraph, mandatory: false))
             return secret
             
         case .Other:
-            secret.fields.append(SecretField(withType: .System, mandatory: true))
-            secret.fields.append(SecretField(withType: .NoteParagraph, mandatory: false))
+            break
         }
         
         return secret

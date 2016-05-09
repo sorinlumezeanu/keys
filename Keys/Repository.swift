@@ -11,9 +11,30 @@ import Foundation
 class Repository
 {
     private(set) static var vaultFiles = [VaultFile]()
+    private(set) static var websites = [Website]()
     
     private static var fileManager = NSFileManager.defaultManager()
     private static var urlForDocumentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+    
+    class func loadWebsites() {
+        guard let websitesFilePath = NSBundle.mainBundle().pathForResource("websites", ofType: "csv") else { return }
+        guard let websitesFileData = NSData(contentsOfFile: websitesFilePath) else { return }
+        guard let websitesFileText = NSString(data:websitesFileData, encoding:NSUTF8StringEncoding) as? String else { return }
+        
+        func extractWebsiteName(url: String) -> String {
+            var trimmedUrl = url
+            if let dotRange = url.rangeOfString(".") {
+                trimmedUrl = url.substringToIndex(dotRange.startIndex)
+            }
+            return trimmedUrl.capitalizedString
+        }
+        
+        let websiteUrls = websitesFileText.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+        
+        for websiteUrl in websiteUrls {
+            self.websites.append(Website(name: extractWebsiteName(websiteUrl), url: websiteUrl))
+        }
+    }
     
     class func countUnlockedVaultFiles() -> Int {
         var count = 0

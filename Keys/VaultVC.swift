@@ -20,6 +20,7 @@ class VaultVC: UITableViewController {
         static let SecretCellIdentifier = "SecretCellIdentifier"
         static let AddSecretCellIdentifier = "AddSecretCellIdentifier"
         static let AddSecretSegueId = "AddSecretSegueId"
+        static let AddRecordSegueId = "AddRecordSegueId"
         static let ShowSecretSegueId = "ShowSecret"
     }
     
@@ -55,19 +56,25 @@ class VaultVC: UITableViewController {
     // MARK: - Actions
     
     @IBAction func addRecord() {
-        self.performSegueWithIdentifier(Constants.AddSecretSegueId, sender: self)
+        self.performSegueWithIdentifier(Constants.AddRecordSegueId, sender: self)
     }
     
-    @IBAction func saveAddSecret(segue: UIStoryboardSegue) {
-        if let secret = (segue.sourceViewController as? AddSecretVC)?.secret {
-            self.vaultFile.vault.append(secret: secret)
-            if !self.editing {
-                self.vaultFile.vault.commitChanges()
-                self.vaultFile.save()
-            }
-            self.tableView.reloadData()
-        }
+    @IBAction func cancelAddRecord(segue: UIStoryboardSegue) {
     }
+    
+    @IBAction func saveAddRecord(segue: UIStoryboardSegue) {        
+    }
+    
+//    @IBAction func saveAddSecret(segue: UIStoryboardSegue) {
+//        if let secret = (segue.sourceViewController as? AddSecretVC)?.secret {
+//            self.vaultFile.vault.append(secret: secret)
+//            if !self.editing {
+//                self.vaultFile.vault.commitChanges()
+//                self.vaultFile.save()
+//            }
+//            self.tableView.reloadData()
+//        }
+//    }
 
     func editButtonTapped(sender: UIBarButtonItem) {
         self.setEditing(true, animated: true)
@@ -149,6 +156,8 @@ class VaultVC: UITableViewController {
         switch identifier {
         case Constants.ShowSecretSegueId:
             return (sender is SecretCell)
+        case Constants.AddSecretSegueId:
+            return false
         default:
             return true
         }
@@ -163,7 +172,7 @@ class VaultVC: UITableViewController {
                 
                 if let systemField = secretVC.secret.fields.filter({ $0.type == .System}).first {
                     if systemField.image?.image == nil {
-                        systemField.image = Image(withType: .Bundled, url: "error")
+                        systemField.image = Image(type: .Bundled, url: "error")
                     }
                 }
             }

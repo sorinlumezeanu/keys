@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        Repository.loadVaultFiles()
+        Repository.loadVaultFiles()        
+        Repository.loadWebsites()
         
         return true
     }
